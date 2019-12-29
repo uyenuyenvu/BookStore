@@ -14,7 +14,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+//       $users=\DB::table('users')->get();
+
+        $users = \DB::table('users')->paginate(10);
+
+        return view('users.index')->with([
+            'users'=>$users
+        ]);
     }
 
     /**
