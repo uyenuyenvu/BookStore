@@ -41,6 +41,10 @@ Route::group([
         Route::get('/edit/{id}', 'CategoryController@edit')->name('backend.category.edit');
         Route::get('/showBooks/{id}', 'CategoryController@showBooks')->name('backend.category.showBooks');
     });
+    //quản lí don hang
+    Route::group(['prefix' => 'oders'], function(){
+        Route::get('/showBooks/{id}', 'OderController@showBooks')->name('backend.oder.showBooks');
+    });
 });
 
 //frontend

@@ -20,7 +20,7 @@ class CreateBooksTable extends Migration
             $table->string('publisher')->comment('nhà xuất bản');
             $table->string('author');
             $table->integer('origin_price');
-            $table->integer('origin_price');
+            $table->integer('sale_price');
             $table->text('content');
             $table->integer('user_id')->nullable();
             $table->integer('category_id');
