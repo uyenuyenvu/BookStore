@@ -1,14 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Book;
-use App\Models\User;
 use Illuminate\Http\Request;
-use function Ramsey\Uuid\v1;
 
-class UserController extends Controller
+class Images extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-//       $users=\DB::table('users')->get();
-
-        $users = \DB::table('users')->paginate(10);
-
-        return view('backend.users.index')->with([
-            'users'=>$users
-        ]);
+        //
     }
 
     /**
@@ -33,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+        //
     }
 
     /**
@@ -66,18 +56,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit');
+        //
     }
 
-    //show danh sach book cua nguoi dung da dang
-    //truyen vao user_id
-    public function showBooks($id){
-        $user=User::find($id);
-        $books=$user->books;
-        return view('backend.users.showBooks')->with([
-            'books'=>$books
-        ]);
-    }
     /**
      * Update the specified resource in storage.
      *

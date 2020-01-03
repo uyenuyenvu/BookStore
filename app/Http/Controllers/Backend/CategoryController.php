@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,8 +17,16 @@ class CategoryController extends Controller
     {
         $category = \DB::table('categories')->paginate(10);
 
-        return view('categories.index')->with([
+        return view('backend.categories.index')->with([
             'category'=>$category
+        ]);
+    }
+    //show san pham theo category, truyen vao id cua category
+    public function showBooks($id){
+        $category=Category::find($id);
+        $books=$category->Books;
+        return view('backend.categories.showBooks')->with([
+            'books'=>$books
         ]);
     }
 

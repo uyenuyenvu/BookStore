@@ -25,18 +25,21 @@ Route::group([
         Route::get('/', 'BookController@index')->name('backend.product.index');
         Route::get('/create', 'BookController@create')->name('backend.product.create');
         Route::get('/edit/{id}', 'BookController@edit')->name('backend.product.edit');
+        Route::get('/show_images/{id}', 'BookController@show_images')->name('backend.product.show_images');
     });
     //quản lí người dùng
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', 'UserController@index')->name('backend.user.index');
         Route::get('/create', 'UserController@create')->name('backend.user.create');
         Route::get('/edit/{id}', 'UserController@edit')->name('backend.user.edit');
+        Route::get('/showBooks/{id}', 'UserController@showBooks')->name('backend.user.showBooks');
     });
     //quản lí danh muc
     Route::group(['prefix' => 'categories'], function(){
         Route::get('/', 'CategoryController@index')->name('backend.category.index');
         Route::get('/create', 'CategoryController@create')->name('backend.category.create');
         Route::get('/edit/{id}', 'CategoryController@edit')->name('backend.category.edit');
+        Route::get('/showBooks/{id}', 'CategoryController@showBooks')->name('backend.category.showBooks');
     });
 });
 

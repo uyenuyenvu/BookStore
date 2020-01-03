@@ -158,16 +158,14 @@
                                             </select>
                                         </div>
                                     </li>
-                                    <li class="shop-pagination"><a href="#">1</a></li>
-                                    <li class="shop-pagination"><a href="#">2</a></li>
-                                    <li class="shop-pagination"><a href="#"><i class="fa fa-caret-right"></i></a></li>
+
                                 </ul>
                             </div>
                         </div>
                         <div class="tab-content">
                             <div class="row tab-pane fade in active" id="home">
                                 <div class="shop-single-product-area">
-                                    @for($i=1;$i<30;$i++)
+                                    @foreach($books as $book)
                                     <div class="col-md-4 col-sm-6">
                                         <div class="single-banner">
                                             <div class="product-wrapper">
@@ -192,7 +190,7 @@
 
                                             <div class="banner-bottom text-center">
                                                 <div class="banner-bottom-title">
-                                                    <a href="#">East of eden</a>
+                                                    <a href="#">{{$book->name}}</a>
                                                 </div>
                                                 <div class="rating-icon">
                                                     <i class="fa fa-star icolor"></i>
@@ -204,11 +202,66 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endfor
+                                        <!--Quickview Product Start -->
+                                        <div id="quickview-wrapper">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="modal-product">
+                                                                <div class="product-images">
+                                                                    <div class="main-image images">
+                                                                        <img alt="" src="{{asset('/frontend/img/quick-view.jpg')}}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="product-info">
+                                                                    <h1>{{$book->name}}</h1>
+                                                                    <div class="price-box">
+                                                                        <p class="s-price"><span class="special-price"><span class="amount">$280.00</span></span></p>
+                                                                    </div>
+                                                                    <a href="product-details.html" class="see-all">See all features</a>
+                                                                    <div class="quick-add-to-cart">
+                                                                        <form method="post" class="cart">
+                                                                            <div class="numbers-row">
+                                                                                <input type="number" id="french-hens" value="3">
+                                                                            </div>
+                                                                            <button class="single_add_to_cart_button" type="submit">Add to cart</button>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="quick-desc">
+                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.
+                                                                    </div>
+                                                                    <div class="social-sharing">
+                                                                        <div class="widget widget_socialsharing_widget">
+                                                                            <h3 class="widget-title-modal">Share this product</h3>
+                                                                            <ul class="social-icons">
+                                                                                <li><a target="_blank" title="Facebook" href="#" class="facebook social-icon"><i class="fa fa-facebook"></i></a></li>
+                                                                                <li><a target="_blank" title="Twitter" href="#" class="twitter social-icon"><i class="fa fa-twitter"></i></a></li>
+                                                                                <li><a target="_blank" title="Pinterest" href="#" class="pinterest social-icon"><i class="fa fa-pinterest"></i></a></li>
+                                                                                <li><a target="_blank" title="Google +" href="#" class="gplus social-icon"><i class="fa fa-google-plus"></i></a></li>
+                                                                                <li><a target="_blank" title="LinkedIn" href="#" class="linkedin social-icon"><i class="fa fa-linkedin"></i></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- .product-info -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
 
 
                                 </div>
-                    </div>
+                            </div>
+                                {!! $books->links() !!}
+
                 </div>
             </div>
         </div>
@@ -221,6 +274,6 @@
         @include('frontend.include.counter')
         @include('frontend.include.shop_infor')
         @include('frontend.include.letter')
-        
+
     <!-- Shop Area End -->
     @endsection

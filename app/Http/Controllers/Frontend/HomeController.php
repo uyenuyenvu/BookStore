@@ -14,7 +14,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.page.index');
+        $books = \DB::table('books')->paginate(10);
+
+        return view('frontend.page.index')->with([
+            'books'=> $books
+        ]);
+
+//        return view('frontend.page.index');
     }
 
     /**
@@ -57,7 +63,7 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

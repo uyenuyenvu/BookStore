@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -16,7 +17,7 @@ class BookController extends Controller
     {
         $books = \DB::table('books')->paginate(10);
 
-        return view('products.index')->with([
+        return view('backend.products.index')->with([
             'books'=> $books
         ]);
     }
@@ -51,6 +52,16 @@ class BookController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function show_images($id){
+        $book=Book::find($id);
+//        dd($book);
+        $images=$book->Images;
+//        dd($images);
+        return view('backend.products.images')->with([
+            'images'=>$images
+        ]);
     }
 
     /**
