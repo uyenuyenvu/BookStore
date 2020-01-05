@@ -19,7 +19,7 @@ Route::group([
     'prefix' => 'admin'
 ], function (){
     // Trang dashboard - trang chủ admin
-    Route::get('/dashboard', 'DashboardController@index')->name('backend.dashboard');
+    Route::get('/', 'DashboardController@index')->name('backend.dashboard');
     // Quản lý sản phẩm
     Route::group(['prefix' => 'products'], function(){
         Route::get('/', 'BookController@index')->name('backend.product.index');
@@ -42,11 +42,11 @@ Route::group([
         Route::get('/showBooks/{id}', 'CategoryController@showBooks')->name('backend.category.showBooks');
     });
     //quản lí don hang
-    Route::group(['prefix' => 'oders'], function(){
-        Route::get('/showBooks/{id}', 'OderController@showBooks')->name('backend.oder.showBooks');
+    Route::group(['prefix' => 'orders'], function(){
+        Route::get('/showBooks/{id}', 'OrderController@showBooks')->name('backend.order.showBooks');
     });
 });
-
+Auth::routes();
 //frontend
 Route::group([
     'namespace' => 'Frontend',
@@ -54,4 +54,12 @@ Route::group([
 ], function (){
     Route::get('/', 'HomeController@index')->name('frontend.home.index');
     Route::get('/show/{id}', 'HomeController@show')->name('frontend.home.show');
+    Route::post('/store','UserController@store')->name('frontend.home.store');
 });
+
+
+
+
+Route::get('/formLogin','Auth\LoginController@showFormLogin')->name('showFormLogin');
+Route::post('/loginStore','Auth\LoginController@loginStore')->name('loginStore');
+Route::get('/logout','Auth\LoginController@logout')->name('logout');

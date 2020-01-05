@@ -12,8 +12,7 @@
             <div class="col-md-1 col-sm-6 visible-sm  col-xs-6">
                 <div class="header-right">
                     <ul>
-                        <li>
-                            <a href="account.html"><i class="flaticon-people"></i></a>
+                        <li>login
                         </li>
                         <li class="shoping-cart">
                             <a href="#">
@@ -107,11 +106,37 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-md-1 hidden-sm">
+            <div class="col-md-1 hidden-sm" style="padding-right: 0 !important;">
                 <div class="header-right">
                     <ul>
                         <li>
-                            <a href="account.html"><i class="flaticon-people"></i></a>
+{{--                            <a href="{{route('login')}}"><i class="fa fa-sign-in"></i></a>--}}
+                            @if (Route::has('login'))
+                                <div class="top-right links">
+                                    @auth
+
+                                        <div class="nav-item dropdown" style=" margin-left: -50px !important; font-size: 14px;">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                {{ Auth::user()->name }}
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                                     document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <a href="{{route('showFormLogin')}}"><i class="fa fa-sign-in"></i></a>
+                                    @endauth
+                                </div>
+                            @endif
                         </li>
                         <li class="shoping-cart">
                             <a href="#">

@@ -15,7 +15,7 @@
                 <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Nguyễn Công Hoan</a>
+                <a href="#" class="d-block">Uyen</a>
             </div>
         </div>
 
@@ -103,6 +103,11 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="/logout" class="nav-link">
+                        Đăng xuất
+                    </a>
                 </li>
             </ul>
         </nav>

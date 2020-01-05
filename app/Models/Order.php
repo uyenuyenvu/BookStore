@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public function books(){
+    public function Books(){
         return $this->belongsToMany(Book::class);
     }
 }

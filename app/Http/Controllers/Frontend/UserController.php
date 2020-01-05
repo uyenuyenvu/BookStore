@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function Ramsey\Uuid\v1;
 
-class HomeController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +18,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        Auth::logout();
-//        dd(1)   ;
-        $books = \DB::table('books')->paginate(10);
+//       $users=\DB::table('users')->get();
 
-        return view('frontend.page.index')->with([
-            'books'=> $books
+        $users = \DB::table('users')->paginate(10);
+
+        return view('backend.users.index')->with([
+            'users'=>$users
         ]);
-
-//        return view('frontend.page.index');
     }
 
     /**
@@ -33,7 +34,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.users.create');
     }
 
     /**
@@ -44,7 +45,20 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        \DB::table('users')->insert([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password' => bcrypt($request->password),
+            'address'=>$request->address,
+            'role'=>1,
+            'phone'=>$request->phone
+        ]);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 1])) {
+            // email admin mới được xác thực thành công
+            return redirect()->intended('/home');
+        }
+
     }
 
     /**
@@ -55,7 +69,7 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        return view('frontend.page.detail');
+        //
     }
 
     /**
@@ -66,9 +80,18 @@ class HomeController extends Controller
      */
     public function edit($id)
     {
-
+        return view('users.edit');
     }
 
+    //show danh sach book cua nguoi dung da dang
+    //truyen vao user_id
+    public function showBooks($id){
+        $user=User::find($id);
+        $books=$user->books;
+        return view('backend.users.showBooks')->with([
+            'books'=>$books
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      *

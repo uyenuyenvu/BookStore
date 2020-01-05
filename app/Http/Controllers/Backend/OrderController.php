@@ -46,16 +46,15 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
-    //show book,
     public function showBooks($id)
     {
-        dd('dfghjkl');
-        $oder = Oder::find($id);
-        $books = $oder->Books;
-        return view('backend.oder.showBooks')->with(['books'=>$books]);
+//        dd('dfghjkl');
+        $order = Order::find($id);
+        $books = $order->Books;
+        return view('backend.order.showBooks')->with(['books'=>$books]);
     }
 
     /**
