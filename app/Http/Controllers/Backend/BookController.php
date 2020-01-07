@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -29,7 +31,7 @@ class BookController extends Controller
      */
     public function create()
     {
-
+        return view('backend.products.create');
     }
 
     /**
@@ -40,7 +42,53 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd('store');
+
+        $validator = Validator::make($request->all(),
+            [
+                'name'=>'required|min:10|max:50',
+                'origin_price' => 'required|numeric',
+                'sale_price' => 'required|numeric',
+                'category_id'=>'required',
+                'author'=>'required',
+                'publisher'=>'required',
+                'content'=>'required'
+            ],
+            [
+                'required' => ':attribute Không được để trống',
+                'min' => ':attribute Không được nhỏ hơn :min',
+                'max' => ':attribute Không được lớn hơn :max'
+            ],
+            [
+                'name' => 'Tên sản phẩm',
+                'origin_price' => 'Giá gốc',
+                'sale_price' => 'Giá bán',
+                'publisher'=>'Nhà xuất bản',
+                'author'=>'Tác Giả',
+                'content'=>'Phần mô tả',
+                'category_id'=>'danh mục'
+            ]
+        );
+        if ($validator->errors()){
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $book = new Book();
+        $book->name = $request->get('name');
+//        $book->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $book->category_id = $request->get('category_id');
+        $book->origin_price = $request->get('origin_price');
+        $book->sale_price = $request->get('sale_price');
+        $book->content = $request->get('content');
+        $book->publisher = $request->get('publisher');
+        $book->author=$request->get('author');
+
+//        $book->status = $request->get('status');
+        $book->user_id = Auth::user()->id;
+        $book->save();
+
+        return redirect()->route('backend.product.index');
     }
 
     /**

@@ -37,50 +37,70 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
+                    <form role="form" method="post" action="{{route('backend.product.store')}}">
+                        @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="" placeholder="Điền tên sản phẩm ">
+                                <label for="exampleInputEmail1">Tên sách</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên sách " name="name">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Danh mục sản phẩm</label>
-                                <select class="form-control select2" style="width: 100%;">
+                                <select class="form-control select2" style="width: 100%;" name="category_id">
                                     <option>--Chọn danh mục---</option>
-                                    <option>Điện thoại</option>
-                                    <option>Máy tính</option>
-                                    <option>Máy ảnh</option>
-                                    <option>Phụ kiện</option>
+                                    <option value="1">truyện phiếm</option>
+
                                 </select>
+                                @error('category_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Thương hiệu sản phẩm</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn thương hiệu---</option>
-                                    <option>Apple</option>
-                                    <option>Samsung</option>
-                                    <option>Nokia</option>
-                                    <option>Oppo</option>
-                                </select>
+                                <label>Nhà xuất bản</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên NXB" name="publisher">
+                                @error('publisher')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group">
+                                <label>tác giả</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên tác giả" name="author">
+                                @error('author')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá khuyến mại</label>
-                                        <input type="text" class="form-control" placeholder="Điền giá khuyến mại">
+                                        <input type="text" class="form-control" placeholder="Điền giá khuyến mại" name="sale_price">
                                     </div>
+                                    @error('sale_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá bán</label>
-                                        <input type="text" class="form-control" placeholder="Điền giá gốc">
+                                        <input type="text" class="form-control" placeholder="Điền giá gốc" name="origin_price">
                                     </div>
+                                    @error('origin_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mô tả sản phẩm</label>
                                 <textarea class="textarea" placeholder="Place some text here"
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="content"></textarea>
+                                @error('content')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
@@ -94,15 +114,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Trạng thái sản phẩm</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn trạng thái---</option>
-                                    <option>Đang nhập</option>
-                                    <option>Mở bán</option>
-                                    <option>Hết hàng</option>
-                                </select>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label>Trạng thái sản phẩm</label>--}}
+{{--                                <select class="form-control select2" style="width: 100%;">--}}
+{{--                                    <option>--Chọn trạng thái---</option>--}}
+{{--                                    <option>Đang nhập</option>--}}
+{{--                                    <option>Mở bán</option>--}}
+{{--                                    <option>Hết hàng</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                         </div>
                         <!-- /.card-body -->
 
