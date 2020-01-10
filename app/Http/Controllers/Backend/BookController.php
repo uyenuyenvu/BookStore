@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -43,37 +44,49 @@ class BookController extends Controller
     public function store(Request $request)
     {
 //        dd('store');
+        $validatedData = $request->validate([
+            'name'=>'required|min:10|max:50',
+            'origin_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
+            'category_id'=>'required',
+            'author'=>'required',
+            'publisher'=>'required',
+            'content'=>'required'
+        ]);
 
-        $validator = Validator::make($request->all(),
-            [
-                'name'=>'required|min:10|max:50',
-                'origin_price' => 'required|numeric',
-                'sale_price' => 'required|numeric',
-                'category_id'=>'required',
-                'author'=>'required',
-                'publisher'=>'required',
-                'content'=>'required'
-            ],
-            [
-                'required' => ':attribute Không được để trống',
-                'min' => ':attribute Không được nhỏ hơn :min',
-                'max' => ':attribute Không được lớn hơn :max'
-            ],
-            [
-                'name' => 'Tên sản phẩm',
-                'origin_price' => 'Giá gốc',
-                'sale_price' => 'Giá bán',
-                'publisher'=>'Nhà xuất bản',
-                'author'=>'Tác Giả',
-                'content'=>'Phần mô tả',
-                'category_id'=>'danh mục'
-            ]
-        );
-        if ($validator->errors()){
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
+//        $validator = Validator::make($request->all(),
+//            [
+//                'name'=>'required|min:10|max:50',
+//                'origin_price' => 'required|numeric',
+//                'sale_price' => 'required|numeric',
+//                'category_id'=>'required',
+//                'author'=>'required',
+//                'publisher'=>'required',
+//                'content'=>'required'
+//            ],
+//            [
+//                'required' => ':attribute Không được để trống',
+//                'min' => ':attribute Không được nhỏ hơn :min',
+//                'max' => ':attribute Không được lớn hơn :max'
+//            ],
+//            [
+//                'name' => 'Tên sản phẩm',
+//                'origin_price' => 'Giá gốc',
+//                'sale_price' => 'Giá bán',
+//                'publisher'=>'Nhà xuất bản',
+//                'author'=>'Tác Giả',
+//                'content'=>'Phần mô tả',
+//                'category_id'=>'danh mục'
+//            ]
+//        );
+//        dd($request);
+//        if ($validator->errors()){
+////            dd($validator->errors());
+//            return back()
+//                ->withErrors($validator)
+//                ->withInput();
+//        }
+
         $book = new Book();
         $book->name = $request->get('name');
 //        $book->slug = \Illuminate\Support\Str::slug($request->get('name'));
@@ -120,7 +133,13 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = \DB::table('categories')->get();
+
+        $book=Book::find($id);
+        return view('backend.products.edit')->with([
+            'book'=>$book,
+            'categories'=>$categories
+        ]);
     }
 
     /**
@@ -132,7 +151,31 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name'=>'required|min:10|max:50',
+            'origin_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
+            'category_id'=>'required',
+            'author'=>'required',
+            'publisher'=>'required',
+            'content'=>'required'
+        ]);
+
+        $book = Book::find($id);
+        $book->name = $request->get('name');
+//        $book->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $book->category_id = $request->get('category_id');
+        $book->origin_price = $request->get('origin_price');
+        $book->sale_price = $request->get('sale_price');
+        $book->content = $request->get('content');
+        $book->publisher = $request->get('publisher');
+        $book->author=$request->get('author');
+
+//        $book->status = $request->get('status');
+        $book->user_id = Auth::user()->id;
+        $book->save();
+
+        return redirect()->route('backend.product.index');
     }
 
     /**

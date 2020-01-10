@@ -39,6 +39,7 @@
                     <!-- form start -->
                     <form role="form" method="post" action="{{route('backend.product.store')}}">
                         @csrf
+
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên sách</label>

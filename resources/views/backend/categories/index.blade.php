@@ -50,8 +50,8 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Tên danh mục</th>
-                                            <th>Thời gian</th>
                                             <th>Mô tả</th>
+                                            <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -59,8 +59,9 @@
                                         <tr>
                                             <td>{{$key->id}}</td>
                                             <td>{{$key->name}}</td>
-                                            <td>{{$key->created_at}}</td>
+
                                             <td>{{$key->description}}</td>
+                                            <td><a href="{{route('backend.category.edit',$key->id)}}" class="btn btn-light">edit</a> </td>
                                         </tr>
                                         @endforeach
                                         </tbody>

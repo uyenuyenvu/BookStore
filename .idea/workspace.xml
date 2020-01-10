@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="698eddba-73db-4e44-a9b8-c928b563292c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/BookController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/includes/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +128,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -195,6 +192,8 @@
       <workItem from="1578109920984" duration="688000" />
       <workItem from="1578203406961" duration="14655000" />
       <workItem from="1578238621688" duration="7115000" />
+      <workItem from="1578414572709" duration="103000" />
+      <workItem from="1578482333334" duration="48000" />
     </task>
     <servers />
   </component>
@@ -202,6 +201,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="26" key="#Scopes" timestamp="1578414670090">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="26" key="#Scopes/0.0.1366.728@0.0.1366.728" timestamp="1578414670090" />
     <state x="371" y="27" width="566" height="741" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1578061037837">
       <screen x="0" y="27" width="1327" height="741" />
     </state>
@@ -218,6 +221,10 @@
       <screen x="0" y="27" width="1327" height="741" />
     </state>
     <state x="100" y="125" width="1127" height="543" key="DiffContextDialog/0.27.1327.741@0.27.1327.741" timestamp="1578059201377" />
+    <state x="462" y="110" key="FileChooserDialogImpl" timestamp="1578482374234">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="462" y="110" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578482374234" />
     <state x="453" y="121" width="411" height="550" key="RollbackChangesDialog" timestamp="1578052605219">
       <screen x="0" y="27" width="1327" height="741" />
     </state>
@@ -226,6 +233,10 @@
       <screen x="0" y="27" width="1327" height="741" />
     </state>
     <state width="595" height="446" key="SwitcherDM/0.27.1327.741@0.27.1327.741" timestamp="1578059407384" />
+    <state x="391" y="193" key="com.intellij.ide.util.TipDialog" timestamp="1578482341729">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="391" y="193" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578482341729" />
     <state x="326" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1577615003482">
       <screen x="0" y="27" width="1327" height="741" />
     </state>

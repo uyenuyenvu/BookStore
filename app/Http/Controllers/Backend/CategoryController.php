@@ -37,7 +37,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = \DB::table('categories')->get();
+//        dd($categories);
+
+        return view('backend.categories.create')->with([
+            'categories'=>$categories
+        ]);
     }
 
     /**
@@ -48,7 +53,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        $validatedData = $request->validate([
+            'name'         => 'required|min:5|max:255',
+            'description' => 'required',
+            'parent_id'   => 'required|numeric',
+        ]);
+        $category=new Category();
+        $category->name=$request->name;
+        $category->description=$request->description;
+        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        if($request->parent_id==0){
+            $category->depth=1;
+        }else{
+         $parent=Category::find($request->parent_id);
+         $category->depth=$parent->depth+1;
+         $category->parent_id=$request->parent_id;
+        }
+//        dd($category);
+        $category->save();
+        return redirect()->route('backend.category.index');
     }
 
     /**
@@ -70,7 +94,13 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = \DB::table('categories')->get();
+
+        $category=Category::find($id);
+        return view('backend.categories.edit')->with([
+            'category'=>$category,
+            'categories'=>$categories
+        ]);
     }
 
     /**
@@ -82,7 +112,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name'         => 'required|min:5|max:255',
+            'description' => 'required',
+            'parent_id'   => 'required|numeric',
+        ]);
+        $category=Category::find($id);
+        $category->name=$request->name;
+        $category->description=$request->description;
+        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        if($request->parent_id==0){
+            $category->depth=1;
+        }else{
+            $parent=Category::find($request->parent_id);
+            $category->depth=$parent->depth+1;
+            $category->parent_id=$request->parent_id;
+        }
+//        dd($category);
+        $category->save();
+        return redirect()->route('backend.category.index');
     }
 
     /**

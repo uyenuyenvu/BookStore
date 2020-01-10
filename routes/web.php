@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+//    dd('aaaaaaaaa');
     return view('welcome');
 });
 Route::group([
@@ -25,6 +26,7 @@ Route::group([
         Route::get('/', 'BookController@index')->name('backend.product.index');
         Route::get('/create', 'BookController@create')->name('backend.product.create');
         Route::post('/store', 'BookController@store')->name('backend.product.store');
+        Route::post('/update/{id}','BookController@update')->name('backend.product.update');
 
         Route::get('/edit/{id}', 'BookController@edit')->name('backend.product.edit');
         Route::get('/show_images/{id}', 'BookController@show_images')->name('backend.product.show_images');
@@ -40,6 +42,8 @@ Route::group([
     Route::group(['prefix' => 'categories'], function(){
         Route::get('/', 'CategoryController@index')->name('backend.category.index');
         Route::get('/create', 'CategoryController@create')->name('backend.category.create');
+        Route::post('/create', 'CategoryController@store')->name('backend.category.store');
+        Route::post('/update/{id}','CategoryController@update')->name('backend.category.update');
         Route::get('/edit/{id}', 'CategoryController@edit')->name('backend.category.edit');
         Route::get('/showBooks/{id}', 'CategoryController@showBooks')->name('backend.category.showBooks');
     });

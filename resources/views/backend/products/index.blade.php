@@ -52,10 +52,9 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Thời gian</th>
                                 <th>giá cũ</th>
                                 <th>giá sale</th>
-                                <th>nội dung</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -63,10 +62,11 @@
                             <tr>
                                 <td>{{ $key->id  }}</td>
                                 <td>{{ $key->name  }}</td>
-                                <td>{{ $key->created_at  }}</td>
+
                                 <td>{{ $key->origin_price  }}</td>
                                 <td>{{ $key->sale_price  }}</td>
-                                <td>{{ $key->content  }}</td>
+                                <td><a href="{{route('backend.product.edit',$key->id)}}" class="btn btn-light">edit</a> </td>
+
 
                             </tr>
 

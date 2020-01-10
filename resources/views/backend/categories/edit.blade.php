@@ -37,21 +37,22 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" method="post" action="{{route('backend.product.update',$book->id)}}">
+                                <form role="form" method="post" action="{{route('backend.category.update',$category->id)}}">
                                     @csrf
 
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Tên sách</label>
-                                            <input type="text" value="{{$book->name}}" class="form-control" id="" placeholder="Điền tên sách " name="name">
+                                            <label for="exampleInputEmail1">Tên danh muc</label>
+                                            <input type="text" class="form-control" id="" placeholder="Điền tên danh muc " name="name" value="{{$category->name}}">
                                             @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label>Danh mục sản phẩm</label>
-                                            <select class="form-control select2" style="width: 100%;" name="category_id">
-                                                <option>--Chọn danh mục---</option>
+                                            <label>Danh mục cha</label>
+                                            <select class="form-control select2" style="width: 100%;" name="parent_id">
+                                                <option value="0">--Chọn danh mục---</option>
+
                                                 @foreach($categories as $cate)
                                                     <option value="{{$cate->id}}">{{$cate->name}}</option>
                                                 @endforeach
@@ -61,52 +62,20 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="form-group">
-                                            <label>Nhà xuất bản</label>
-                                            <input type="text" value="{{$book->publisher}}" class="form-control" id="" placeholder="Điền tên NXB" name="publisher">
-                                            @error('publisher')
+                                            <label>mo ta</label>
+                                            <input type="text" value="{{$category->description}}" class="form-control" id="" placeholder="Mo ta danh muc" name="description">
+                                            @error('description')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
 
                                         </div>
-                                        <div class="form-group">
-                                            <label>tác giả</label>
-                                            <input type="text" value="{{$book->author}}" class="form-control" id="" placeholder="Điền tên tác giả" name="author">
-                                            @error('author')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
 
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Giá khuyến mại</label>
-                                                    <input type="text" value="{{$book->sale_price}}" class="form-control" placeholder="Điền giá khuyến mại" name="sale_price">
-                                                </div>
-                                                @error('sale_price')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Giá bán</label>
-                                                    <input type="text" value="{{$book->origin_price}}" class="form-control" placeholder="Điền giá gốc" name="origin_price">
-                                                </div>
-                                                @error('origin_price')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
+
+
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Mô tả sản phẩm</label>
-                                            <textarea class="textarea"  placeholder="Place some text here"
-                                                      style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="content">{{$book->content}}</textarea>
-                                            @error('content')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">Hình ảnh sản phẩm</label>
+                                            <label for="exampleInputFile">Hình ảnh mo ta</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="exampleInputFile">
