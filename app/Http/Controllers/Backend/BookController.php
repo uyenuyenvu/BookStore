@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
@@ -19,6 +21,9 @@ class BookController extends Controller
     public function index()
     {
         $books = \DB::table('books')->paginate(10);
+//        $book=Book::find($id);
+//
+//        $images=$book->Images;
 
         return view('backend.products.index')->with([
             'books'=> $books
@@ -43,8 +48,16 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-//        dd('store');
+
+
+//            $path = Storage::disk('public')->putFile('images', $request->file('images'));
+//            $file = $request->file('images');
+//            $name = $file->getClientOriginalName();
+//            $file->move('image_2', $name);
+
+
         $validatedData = $request->validate([
+            'images'=>'required|image|max:1024',
             'name'=>'required|min:10|max:50',
             'origin_price' => 'required|numeric',
             'sale_price' => 'required|numeric',
@@ -53,39 +66,6 @@ class BookController extends Controller
             'publisher'=>'required',
             'content'=>'required'
         ]);
-
-//        $validator = Validator::make($request->all(),
-//            [
-//                'name'=>'required|min:10|max:50',
-//                'origin_price' => 'required|numeric',
-//                'sale_price' => 'required|numeric',
-//                'category_id'=>'required',
-//                'author'=>'required',
-//                'publisher'=>'required',
-//                'content'=>'required'
-//            ],
-//            [
-//                'required' => ':attribute Không được để trống',
-//                'min' => ':attribute Không được nhỏ hơn :min',
-//                'max' => ':attribute Không được lớn hơn :max'
-//            ],
-//            [
-//                'name' => 'Tên sản phẩm',
-//                'origin_price' => 'Giá gốc',
-//                'sale_price' => 'Giá bán',
-//                'publisher'=>'Nhà xuất bản',
-//                'author'=>'Tác Giả',
-//                'content'=>'Phần mô tả',
-//                'category_id'=>'danh mục'
-//            ]
-//        );
-//        dd($request);
-//        if ($validator->errors()){
-////            dd($validator->errors());
-//            return back()
-//                ->withErrors($validator)
-//                ->withInput();
-//        }
 
         $book = new Book();
         $book->name = $request->get('name');
@@ -100,6 +80,22 @@ class BookController extends Controller
 //        $book->status = $request->get('status');
         $book->user_id = Auth::user()->id;
         $book->save();
+        $img=new Image();
+        $images = $request->file('images');
+        $path = "backend/dist/img/book";
+        $i=0;
+        foreach ($images as $image){
+            $img=new Image();
+            $i++;
+            $image->store('image');
+            $name = date('YmdHis') . $i."." . $image->getClientOriginalExtension();
+            $image          ->move($path, $name);
+            $img->name=$name;
+            $img->folder=$path;
+            $img->parent_id=$book->id;
+             $img->save();
+        }
+
 
         return redirect()->route('backend.product.index');
     }
@@ -117,9 +113,8 @@ class BookController extends Controller
 
     public function show_images($id){
         $book=Book::find($id);
-//        dd($book);
+
         $images=$book->Images;
-//        dd($images);
         return view('backend.products.images')->with([
             'images'=>$images
         ]);

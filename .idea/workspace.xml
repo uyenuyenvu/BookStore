@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="698eddba-73db-4e44-a9b8-c928b563292c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/PetShop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PetShop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/BookController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/BookController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_02_115133_create_images_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_02_115133_create_images_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/ImagesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/ImagesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/products/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +130,8 @@
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark-ext-table" />
     </include_path>
   </component>
   <component name="ProjectId" id="1VNxcPiSNUEh9QDdnsjP2gPVPs5" />
@@ -194,6 +205,7 @@
       <workItem from="1578238621688" duration="7115000" />
       <workItem from="1578414572709" duration="103000" />
       <workItem from="1578482333334" duration="48000" />
+      <workItem from="1578727824689" duration="3704000" />
     </task>
     <servers />
   </component>

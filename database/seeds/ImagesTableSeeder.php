@@ -14,6 +14,7 @@ class ImagesTableSeeder extends Seeder
         DB::table('images')->truncate();
         for($i=0;$i<20;$i++) {
             DB::table('images')->insert([
+                'name'=>'uyen.jpg',
                 'folder' => 'public/frontend',
                 'parent_id' => 1
             ]);

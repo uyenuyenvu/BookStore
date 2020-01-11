@@ -37,7 +37,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{route('backend.product.store')}}">
+                    <form role="form" method="post" action="{{route('backend.product.store')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="card-body">
@@ -107,7 +107,7 @@
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="images[]" multiple>
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">

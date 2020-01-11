@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -15,8 +16,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-//        Auth::logout();
-//        dd(1)   ;
+//        Storage::deleteDirectory('newFolder');
+//        dd('ok');
+//         Storage::disk('local2')->delete('app2/fileTest.txt');
+////        return Storage::disk('local2')->download('app2\fileTest.txt','file.txt');
+//        dd(1);
+////        Auth::logout();
+////        dd(1)   ;
         $books = \DB::table('books')->paginate(10);
 
         return view('frontend.page.index')->with([
