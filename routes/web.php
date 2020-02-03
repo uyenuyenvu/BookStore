@@ -12,8 +12,7 @@
 */
 
 Route::get('/', function () {
-//    dd('aaaaaaaaa');
-    return view('welcome');
+    return redirect('/home');
 });
 Route::group([
     'namespace' => 'Backend',
@@ -24,11 +23,12 @@ Route::group([
     // Quản lý sản phẩm
     Route::group(['prefix' => 'products'], function(){
         Route::get('/', 'BookController@index')->name('backend.product.index');
-        Route::get('/create', 'BookController@create')->name('backend.product.create');
+        Route::get('/create', 'BookController@create')->name('backend.product.create')->middleware('can:create');
         Route::post('/store', 'BookController@store')->name('backend.product.store');
         Route::post('/update/{id}','BookController@update')->name('backend.product.update');
-
         Route::get('/edit/{id}', 'BookController@edit')->name('backend.product.edit');
+        Route::get('/edit/{book}','BookController@edit')->name('backend.product.edit')->middleware('can:edit,book');
+        Route::get('/destroy/{book}','BookController@destroy')->name('backend.product.destroy')->middleware('can:delete,book');
         Route::get('/show_images/{id}', 'BookController@show_images')->name('backend.product.show_images');
     });
     //quản lí người dùng
@@ -37,6 +37,9 @@ Route::group([
         Route::get('/create', 'UserController@create')->name('backend.user.create');
         Route::get('/edit/{id}', 'UserController@edit')->name('backend.user.edit');
         Route::get('/showBooks/{id}', 'UserController@showBooks')->name('backend.user.showBooks');
+        Route::get('/destroy/{id}', 'UserController@destroy')->name('backend.user.destroy');
+        Route::post('/update/{id}','UserController@update')->name('backend.user.update');
+
     });
     //quản lí danh muc
     Route::group(['prefix' => 'categories'], function(){
@@ -57,11 +60,14 @@ Auth::routes();
 Route::group([
     'namespace' => 'Frontend',
     'prefix' => 'home'
-], function (){
-    Route::get('/', 'HomeController@index')->name('frontend.home.index');
-    Route::get('/show/{id}', 'HomeController@show')->name('frontend.home.show');
-    Route::post('/store','UserController@store')->name('frontend.home.store');
-});
+    ], function (){
+        Route::get('/', 'HomeController@index')->name('frontend.home.index');
+        Route::get('/show/{id}', 'HomeController@show')->name('frontend.home.show');
+        Route::post('/store','UserController@store')->name('frontend.home.store');
+        Route::get('/about','HomeController@about')->name('frontend.home.about');
+    Route::get('/contact','HomeController@contact')->name('frontend.home.contact');
+        Route::get('/showCart','HomeController@showCart')->name('frontend.home.showCart');
+    });
 
 
 

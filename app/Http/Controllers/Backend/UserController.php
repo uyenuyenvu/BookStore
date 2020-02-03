@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -66,7 +66,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('users.edit');
+        $user=User::find($id);
+        return view('backend.users.edit')->with([
+            'user'=>$user
+        ]);
     }
 
     //show danh sach book cua nguoi dung da dang
@@ -87,7 +90,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user=User::find($id);
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->phone=$request->phone;
+        $user->address=$request->address;
+        $user->role=$request->role;
+        if($request->password !='null') {
+            $user->password = md5($request->password);
+        }
+        $user->save();
+//        dd($user->name);
+        return redirect('/');
     }
 
     /**
@@ -98,6 +112,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::find($id);
+//        dd($user);
+        $user->delete();
+        return redirect('/admin/users');
+
     }
 }

@@ -21,6 +21,7 @@ class BooksTableSeeder extends Seeder
                 'author' => 'uyen',
                 'publisher' => 'uyen',
                 'category_id'=>$i,
+                'user_id'=>19,
 
             ]);
         }

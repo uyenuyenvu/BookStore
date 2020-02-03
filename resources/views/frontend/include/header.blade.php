@@ -89,10 +89,10 @@
                             <li><a href="about.html">ABOUT AUTHOR</a></li>
                             <li><a href="#">pages</a>
                                 <ul class="sub-menu">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="cart.html">Cart Page</a></li>
+                                    <li><a href="{{asset('/home/about')}}">About Us</a></li>
+                                    <li><a href="{{asset('/home/showCart')}}">Cart Page</a></li>
                                     <li><a href="checkout.html">Check Out</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{asset('/home/contact')}}">Contact</a></li>
                                     <li><a href="login.html">Login</a></li>
                                     <li><a href="my-account.html">My Account</a></li>
                                     <li><a href="shop.html">Shopping Page</a></li>

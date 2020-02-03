@@ -33,30 +33,39 @@
                             <!-- general form elements -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Tạo mới người dùng</h3>
+                                    <h3 class="card-title">sửa trang cá nhân</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form">
+                                <form role="form" action="{{route('backend.user.update',$user->id)}}" method="post">
+                                    @csrf
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Tên</label>
-                                            <input type="text" class="form-control" id="" placeholder="Tên người dùng">
+                                            <input type="text" class="form-control" id="" value="{{$user->name}}" name="name">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Email</label>
-                                            <input type="email" class="form-control" id="" placeholder="Email">
+                                            <input type="email" class="form-control" id="" value="{{$user->email}}" name="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Địa chỉ</label>
+                                            <input type="text" class="form-control" id="" value="{{$user->address}}" name="address">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Số điện thoại</label>
+                                            <input type="tel" class="form-control" id="" value="{{$user->phone}}" name="phone" pattern="[0-9]{10}">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Mật khẩu</label>
-                                            <input type="password" class="form-control" id="">
+                                            <input type="password" class="form-control" id="" name="password">
                                         </div>
                                         <div class="form-group">
                                             <label>Quyền</label>
-                                            <select class="form-control select2" style="width: 100%;">
-                                                <option>--Chọn quyền---</option>
-                                                <option>Admin</option>
-                                                <option>User</option>
+                                            <select class="form-control select2" style="width: 100%;" name="role">
+                                                <option value="0">--Chọn quyền---</option>
+                                                <option value="0" @if($user->role==0) selected @endif>mua sách</option>
+                                                <option value="1" @if($user->role==1) selected @endif>Bán sách</option>
                                             </select>
                                         </div>
                                     </div>

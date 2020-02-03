@@ -54,7 +54,7 @@
                                 <th>Email</th>
                                 <th>Tên</th>
 
-                                <th>Status</th>
+                                <th>#</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,7 +64,10 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->name}}</td>
 
-                                <td><span class="tag tag-success">Approved</span></td>
+                                <td><a href="{{route('backend.user.destroy',$user->id)}}" class="btn btn-success">xóa</a>
+                                    <a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-success">sửa</a></td>
+
+
                             </tr>
                            @endforeach
 

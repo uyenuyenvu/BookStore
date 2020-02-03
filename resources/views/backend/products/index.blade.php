@@ -59,14 +59,19 @@
                             </thead>
                             <tbody>
                             @foreach($books as $key)
+{{--                                {{dd($key)}}--}}
                             <tr>
                                 <td>{{ $key->id  }}</td>
                                 <td>{{ $key->name  }}</td>
 
                                 <td>{{ $key->origin_price  }}</td>
                                 <td>{{ $key->sale_price  }}</td>
-                                <td><a href="{{route('backend.product.edit',$key->id)}}" class="btn btn-light">edit</a> </td>
-
+                               @can("edit",$key)
+                                <td><a href="{{route('backend.product.edit',$key->id)}}" class="btn btn-light">edit</a>
+                                    <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-light">delete</a></td>
+                                    @elsecan('edit', $key)
+                                    <td> aaaaaaaaa</td>
+                                    @endcan
 
                             </tr>
 

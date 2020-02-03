@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Book;
+use App\Policies\BookPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +16,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        Book::class => BookPolicy::class,
+        Category::class => CategoryPolicy::class,
+        User::class => UserPolicy::class
     ];
 
     /**
@@ -24,7 +29,14 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        $user=Auth::user();
 
-        //
+//        Gate::define('update-product', function ($user, $book){
+//            return $user->id == $book->user_id;
+//        });
+//
+//        Gate::define('view-dashboard',function(){
+//            return $user->role==2;
+//        });
     }
 }

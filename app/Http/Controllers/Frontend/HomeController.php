@@ -97,4 +97,15 @@ class HomeController extends Controller
     {
         //
     }
+    //hiển thị trang about
+    public function about(){
+        return view('frontend.page.about');
+    }
+    public function showCart(){
+        return view('frontend.page.cart');
+    }
+    public function contact(){
+        return view('frontend.page.contact');
+    }
+
 }

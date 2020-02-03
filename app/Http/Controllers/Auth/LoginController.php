@@ -23,7 +23,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
+     * Where to redirect users after login.  
      *
      * @var string
      */
@@ -39,7 +39,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function showFormLogin(){
-        return view('auth.login');
+        return view('frontend.page.login');
     }
     public function logout(){
 //        dd('dfghj');

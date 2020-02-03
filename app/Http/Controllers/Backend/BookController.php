@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = \DB::table('books')->paginate(10);
+        $books = Book::paginate(10);
 //        $book=Book::find($id);
 //
 //        $images=$book->Images;
@@ -37,7 +38,14 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('backend.products.create');
+        $user=Auth::user();
+
+        if ($user->can('update')) {
+            return view('backend.products.create');
+
+        }else{
+            return abort('404');
+        }
     }
 
     /**
@@ -126,15 +134,40 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
+//        dd($book);
         $categories = \DB::table('categories')->get();
 
-        $book=Book::find($id);
-        return view('backend.products.edit')->with([
-            'book'=>$book,
-            'categories'=>$categories
-        ]);
+//        $book=Book::find($id);
+
+        $user=Auth::user();
+
+//        return view('backend.products.edit')->with([
+//            'book'=>$book,
+//            'categories'=>$categories
+//        ]);
+
+
+        if ($user->can('update', $book)) {
+            return view('backend.products.edit')->with([
+                'book'=>$book,
+                'categories'=>$categories
+            ]);
+        }else{
+            return abort('404');
+        }
+
+//
+//        if (Gate::allows('update-product', $book)){
+//            return view('backend.products.edit')->with([
+//                'book'=>$book,
+//                'categories'=>$categories
+//            ]);
+//        }else{
+//            return abort('404');
+//        }
+
     }
 
     /**
@@ -179,8 +212,15 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+//        $book=Book::find($id);
+        $user=Auth::user();
+        if ($user->can('delete', $book)) {
+            $book->delete();
+            return redirect()->route('backend.product.index');
+        }else{
+            return abort('404');
+        }
     }
 }
