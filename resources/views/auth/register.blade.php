@@ -1,4 +1,8 @@
-@extends('layouts.app')
+@extends('frontend.layouts.master');
+
+@section('title')
+    register
+@endsection
 
 @section('content')
 <div class="container">

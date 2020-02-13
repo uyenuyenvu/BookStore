@@ -25,6 +25,19 @@ class CreateBooksTable extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('category_id');
             $table->timestamp('deleteds_at')->nullable();
+            $table->text('slug');
+            $table->integer('number_publish');
+            $table->boolean('status');
+            $table->integer('publisher_id')->nullable();
+            $table->integer('author_id')->nullable();
+            $table->text('description');
+            $table->text('cover_type')->comment('loại bìa');
+            $table->integer('number_pages');
+            $table->text('size')->comment('kích thước');
+            $table->text('supplier')->comment('nhà cung cấp');
+            $table->integer('supplier_id')->nullable();
+            $table->integer('number_import')->comment('số lượng nhập về');
+            $table->integer('number_sold')->comment('số lượng đã bán');
         });
     }
 

@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Storage;
+use MongoDB\Driver\Session;
 
 class HomeController extends Controller
 {
@@ -16,6 +22,30 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        $arr=['1','2','3','4'];
+//        $users=User::all();
+//        Cache::put('menu',$users);
+//        $users=Cache::forget('menu');
+//
+//        $users=Cache::get('menu');
+//
+//        dd($users);
+//        $value=Cache::get('menu');
+//        if(Cache::has('mednu')){
+//            dd($value);
+//        }else{
+//            dd('default');
+//        }
+//        dd($value);
+
+//        $number=Cache::increment('number',1);
+//        dd($number);
+//
+//        $users=Cache::remember('users',60,function(){
+//            return User::all();
+//        });
+//        dd($users);
+
 //        Storage::deleteDirectory('newFolder');
 //        dd('ok');
 //         Storage::disk('local2')->delete('app2/fileTest.txt');
@@ -23,7 +53,29 @@ class HomeController extends Controller
 //        dd(1);
 ////        Auth::logout();
 ////        dd(1)   ;
-        $books = \DB::table('books')->paginate(10);
+//        \session(['1'=>1,'2'=>2]);
+//        session('111','value');
+//        dd($save);
+//        \Session::put('age','aaaaa');
+//        \session()->forget('age');
+//        dd(\session()->all());
+//        if (session()->has('age')) {
+//            dd('co');
+//        }else{
+//            dd('khong');
+//        }
+//        dd(session()->get('1'));
+        //cookie
+//        return response('hello')->cookie('giohang1','1',10);
+//         $cookie =cookie('giohang2','1',10);
+//         return response('helooo')->cookie($cookie);
+//        Cookie::queue('user_id',1);
+//        Cookie::queue('email','uyen@gmail.com');
+//        $value=Cookie::get('email');
+//        echo $value;
+//        return 1;
+
+            $books = \DB::table('books')->paginate(10);
 
         return view('frontend.page.index')->with([
             'books'=> $books
@@ -59,9 +111,41 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showBook($slug)
     {
-        return view('frontend.page.detail');
+        $book = Book::where('slug',$slug)->first();
+//        dd($book);
+        $user = Auth::user();
+        $seller = \App\User::find($book->user_id);
+        $category = Category::find($book->category_id);
+        $images = $book->Images;
+//        dd($images);
+        if($user!=null) {
+            if ($user->role == 1) {
+                return view('frontend.page.detail')->with([
+                    'book' => $book,
+                    'user' => $user,
+                    'seller' => $seller,
+                    'category' => $category,
+                    'images' => $images
+                ]);
+            } else {
+                return view('backend.products.show')->with([
+                    'book' => $book,
+                    'user' => $user,
+                    'seller' => $seller,
+                    'category' => $category,
+                    'images' => $images
+                ]);
+            }
+        }else{
+            return view('frontend.page.detail')->with([
+                'book' => $book,
+                'seller' => $seller,
+                'category' => $category,
+                'images' => $images
+            ]);
+        }
     }
 
     /**
@@ -105,7 +189,8 @@ class HomeController extends Controller
         return view('frontend.page.cart');
     }
     public function contact(){
-        return view('frontend.page.contact');
+        return view('frontend.page.contact
+        ');
     }
 
 }

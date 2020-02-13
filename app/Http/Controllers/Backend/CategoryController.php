@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -15,10 +18,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = \DB::table('categories')->paginate(10);
-
+        $categories = \DB::table('categories')->paginate(10);
+        $user=Auth::user();
+//        $categories = Cache::remember('categories',60*60*24,function(){
+//            return \DB::table('categories')->paginate(10);
+//        });
         return view('backend.categories.index')->with([
-            'category'=>$category
+            'category'=>$categories,
+            'user'=>$user
         ]);
     }
     //show san pham theo category, truyen vao id cua category
@@ -38,10 +45,12 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = \DB::table('categories')->get();
+        $user=Auth::user();
 //        dd($categories);
 
         return view('backend.categories.create')->with([
-            'categories'=>$categories
+            'categories'=>$categories,
+            'user'=>$user
         ]);
     }
 
@@ -97,9 +106,11 @@ class CategoryController extends Controller
         $categories = \DB::table('categories')->get();
 
         $category=Category::find($id);
+        $user=Auth::user();
         return view('backend.categories.edit')->with([
             'category'=>$category,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'user'=>$user
         ]);
     }
 

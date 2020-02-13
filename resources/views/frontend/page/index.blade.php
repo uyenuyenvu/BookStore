@@ -169,9 +169,8 @@
                                     <div class="col-md-4 col-sm-6">
                                         <div class="single-banner">
                                             <div class="product-wrapper">
-                                                <a href="#" class="single-banner-image-wrapper">
+                                                <a href="{{route('frontend.home.showBook',$book->slug)}}" class="single-banner-image-wrapper">
                                                     <img alt="" src="{{asset('/frontend/img/featured/1.jpg')}}">
-                                                    <div class="price"><span>$</span>160</div>
                                                 </a>
                                                 <div class="product-description">
                                                     <div class="functional-buttons">

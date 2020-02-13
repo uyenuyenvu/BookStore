@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\User;
+//use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -51,6 +51,9 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return mixed
      */
+//    public function edit(User $user, User $model){
+//        return $user->id===$model->id;
+//    }
     public function update(User $user, User $model)
     {
         return $user->id===$model->id;

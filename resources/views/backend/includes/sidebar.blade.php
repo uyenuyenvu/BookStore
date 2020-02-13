@@ -15,7 +15,7 @@
                 <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Uyen</a>
+                <a href="{{route('backend.user.show',$user->id)}}" class="d-block">{{$user->name}}</a>
             </div>
         </div>
 

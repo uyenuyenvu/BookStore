@@ -1,10 +1,11 @@
-
-<div class="header-area">
+<div class="header-area" style="-moz-box-shadow: 3px 3px 5px 0px #666;
+    -webkit-box-shadow: 3px 3px 5px 0px #666;
+    box-shadow: 0px 6px 5px 0px #b8b894;">
     <div class="container">
         <div class="row">
             <div class="col-md-2 col-sm-6 col-xs-6">
                 <div class="header-logo">
-                    <a href="index.html">
+                    <a href="{{route('frontend.home.index')}}">
                         <img src="{{asset('/frontend/img/logo.png')}}" alt="">
                     </a>
                 </div>
@@ -83,7 +84,25 @@
                 <div class="mainmenu text-center">
                     <nav>
                         <ul id="nav">
-                            <li><a href="index.html">HOME</a></li>
+                            <li><a href="#">DANH MỤC</a>
+                                <ul  class="sub-menu" >
+                                    @foreach($categories as $category)
+                                        @if($category->depth===1)
+                                            <li class="li"><a href="#">{{$category->name}}</a>
+                                                @php($cates=\App\Models\Category::where('parent_id',$category->id)->get())
+                                                @if($cates!=null)
+                                                    <ul class="sub-menu sub-menu2">
+                                                    @foreach($cates as $cate)
+                                                        <li><a href="#">{{$cate->name}}</a></li>
+                                                    @endforeach
+                                                    </ul>
+                                                    @endif
+                                            </li>
+                                        @endif
+                                    @endforeach
+
+                                </ul>
+                            </li>
                             <li><a href="shop.html">FEATURED</a></li>
                             <li><a href="shop.html">REVIEW BOOK</a></li>
                             <li><a href="about.html">ABOUT AUTHOR</a></li>
@@ -101,7 +120,7 @@
                                     <li><a href="404.html">404 Page</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">CONTACT</a></li>
+                            <li><a href="{{route('frontend.home.contact')}}">CONTACT</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -109,33 +128,38 @@
             <div class="col-md-1 hidden-sm" style="padding-right: 0 !important;">
                 <div class="header-right">
                     <ul>
-                        <li>
-{{--                            <a href="{{route('login')}}"><i class="fa fa-sign-in"></i></a>--}}
+                        <li class="shoping-cart" >
                             @if (Route::has('login'))
                                 <div class="top-right links">
                                     @auth
 
-                                        <div class="nav-item dropdown" style=" margin-left: -50px !important; font-size: 14px;">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <div class="dropdown" style="margin-left: -50px !important;">
+                                            <span class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer; font-size: 18px;">
                                                 {{ Auth::user()->name }}
-                                            </a>
+                                            </span>
+                                            <div class="add-to-cart-product" style="width: 150px; ">
 
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                                   onclick="event.preventDefault();
-                                                                     document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
+                                                                                                   onclick="event.preventDefault();
+                                                                                                                     document.getElementById('logout-form').submit();" style="font-size: 16px !important; padding: 10px">
+                                                                                                    {{ __('Logout') }}
+                                                                                                </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                <form id="logout-form" class="dropdown-item" action="{{ route('logout') }}" method="POST" >
                                                     @csrf
                                                 </form>
+
+
+                                                <a class="dropdown-item" href="{{route('frontend.home.showAccount',Auth::user()->id)}}" style="font-size: 16px; padding: 10px">My Account</a>
+                                            </div>
                                             </div>
                                         </div>
+
                                     @else
                                         <a href="{{route('showFormLogin')}}"><i class="fa fa-sign-in"></i></a>
                                     @endauth
-                                </div>
+
+
                             @endif
                         </li>
                         <li class="shoping-cart">

@@ -22,6 +22,14 @@ class BooksTableSeeder extends Seeder
                 'publisher' => 'uyen',
                 'category_id'=>$i,
                 'user_id'=>19,
+                'slug'=>\Illuminate\Support\Str::slug('book'.$i.time()),
+                'description'=>'mô tả cho sách',
+                'status'=>0,
+                'number_pages'=>100,
+                'cover_type'=>'cứng',
+                'size'=>'40cm x 30cm',
+                'supplier'=>'uyên đã cung cấp',
+                'number_publish'=>2
 
             ]);
         }

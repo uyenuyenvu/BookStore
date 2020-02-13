@@ -46,6 +46,11 @@
                         </div>
                     </div>
                     <!-- /.card-header -->
+                    @if(session()->has('succes'))
+                        <h1>
+                            {{session()->get('succes')}}
+                        </h1>
+                        @endif
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
                             <thead>
@@ -66,13 +71,16 @@
 
                                 <td>{{ $key->origin_price  }}</td>
                                 <td>{{ $key->sale_price  }}</td>
+                                <td>
+                                    <a href="{{route('backend.product.show',$key->id)}}" class="btn btn-light">xem</a>
                                @can("edit",$key)
-                                <td><a href="{{route('backend.product.edit',$key->id)}}" class="btn btn-light">edit</a>
-                                    <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-light">delete</a></td>
-                                    @elsecan('edit', $key)
-                                    <td> aaaaaaaaa</td>
-                                    @endcan
+                                <a href="{{route('backend.product.edit',$key)}}" class="btn btn-light">sửa</a>
 
+                                    <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-light">xóa</a>
+
+
+                                    @endcan
+                                </td>
                             </tr>
 
 @endforeach

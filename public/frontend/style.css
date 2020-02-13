@@ -2484,3 +2484,15 @@ h3.widget-title-modal {
 #scrollUp i {
     line-height: 40px;
 }
+.sub-menu2{
+    display: none;
+    position: absolute;
+    left: 230px !important;
+    top: 0px !important;
+}
+.li:hover .sub-menu2{
+    display: block;
+}
+.sub-menu2:hover{
+    display: block;
+}

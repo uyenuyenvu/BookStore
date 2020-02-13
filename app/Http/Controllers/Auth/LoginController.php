@@ -23,7 +23,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.  
+     * Where to redirect users after login.
      *
      * @var string
      */
@@ -48,17 +48,17 @@ class LoginController extends Controller
     }
     public function loginStore(Request $request)
     {
-//        dd($request);
+
         $email = $request->get('email');
         $password = $request->get('password');
-
+//        dd(Auth::attempt(['email' => $email, 'password' => $password, 'role' => 1]));
         if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 2])) {
             // email admin mới được xác thực thành công
             return redirect()->intended('/admin');
         }
         if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 1])) {
             // email admin mới được xác thực thành công
-            return redirect()->intended('/home');
+            return redirect()->intended('/');
         }
 
 

@@ -55,7 +55,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
+        $user=User::find($id);
+        return view('backend.users.show')->with([
+            'user'=>$user
+        ]);
     }
 
     /**
@@ -67,6 +70,12 @@ class UserController extends Controller
     public function edit($id)
     {
         $user=User::find($id);
+        //nếu người dùng role=1 thì trả về giao diện khác
+        if($user->role==1){
+            return view('frontend.page.editAccount')->with([
+                'user'=>$user
+            ]);
+        }
         return view('backend.users.edit')->with([
             'user'=>$user
         ]);

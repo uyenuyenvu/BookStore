@@ -64,8 +64,15 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->name}}</td>
 
-                                <td><a href="{{route('backend.user.destroy',$user->id)}}" class="btn btn-success">xóa</a>
-                                    <a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-success">sửa</a></td>
+                                <td>
+                                    @can('delete',$user->id)
+                                    <a href="{{route('backend.user.destroy',$user->id)}}" class="btn btn-success">xóa</a>
+                                    @endcan
+                                    @can('edit',$user->id)
+                                    <a href="{{route('backend.user.edit',$user->id)}}" class="btn btn-success">sửa</a>
+                                    @endcan
+                                     <a href="{{route('backend.user.show',$user->id)}}" class="btn btn-success">xem</a>
+                                </td>
 
 
                             </tr>

@@ -41,7 +41,7 @@ class BookPolicy
      */
     public function create(User $user)
     {
-        return $user->role === 2;
+        return $user->role;
     }
 
     /**

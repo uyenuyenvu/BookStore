@@ -18,13 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-//       $users=\DB::table('users')->get();
-
-        $users = \DB::table('users')->paginate(10);
-
-        return view('backend.users.index')->with([
-            'users'=>$users
-        ]);
+        //
     }
 
     /**
@@ -34,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+        //
     }
 
     /**
@@ -69,7 +63,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user=User::find($id);
+        return view('frontend.page.showMyAccount')->with([
+            'user'=>$user
+        ]);
     }
 
     /**
@@ -83,15 +80,7 @@ class UserController extends Controller
         return view('users.edit');
     }
 
-    //show danh sach book cua nguoi dung da dang
-    //truyen vao user_id
-    public function showBooks($id){
-        $user=User::find($id);
-        $books=$user->books;
-        return view('backend.users.showBooks')->with([
-            'books'=>$books
-        ]);
-    }
+
     /**
      * Update the specified resource in storage.
      *

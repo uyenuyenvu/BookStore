@@ -23,10 +23,10 @@ Route::group([
     // Quản lý sản phẩm
     Route::group(['prefix' => 'products'], function(){
         Route::get('/', 'BookController@index')->name('backend.product.index');
-        Route::get('/create', 'BookController@create')->name('backend.product.create')->middleware('can:create');
+        Route::get('/create', 'BookController@create')->name('backend.product.create');
         Route::post('/store', 'BookController@store')->name('backend.product.store');
         Route::post('/update/{id}','BookController@update')->name('backend.product.update');
-        Route::get('/edit/{id}', 'BookController@edit')->name('backend.product.edit');
+        Route::get('/show/{id}', 'BookController@show')->name('backend.product.show');
         Route::get('/edit/{book}','BookController@edit')->name('backend.product.edit')->middleware('can:edit,book');
         Route::get('/destroy/{book}','BookController@destroy')->name('backend.product.destroy')->middleware('can:delete,book');
         Route::get('/show_images/{id}', 'BookController@show_images')->name('backend.product.show_images');
@@ -34,8 +34,9 @@ Route::group([
     //quản lí người dùng
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', 'UserController@index')->name('backend.user.index');
-        Route::get('/create', 'UserController@create')->name('backend.user.create');
         Route::get('/edit/{id}', 'UserController@edit')->name('backend.user.edit');
+        Route::get('/show/{id}', 'UserController@show')->name('backend.user.show');
+
         Route::get('/showBooks/{id}', 'UserController@showBooks')->name('backend.user.showBooks');
         Route::get('/destroy/{id}', 'UserController@destroy')->name('backend.user.destroy');
         Route::post('/update/{id}','UserController@update')->name('backend.user.update');
@@ -67,6 +68,8 @@ Route::group([
         Route::get('/about','HomeController@about')->name('frontend.home.about');
     Route::get('/contact','HomeController@contact')->name('frontend.home.contact');
         Route::get('/showCart','HomeController@showCart')->name('frontend.home.showCart');
+        Route::get('/showAccount/{id}','UserController@show')->name('frontend.home.showAccount');
+        Route::get('/detailBook/{slug}','HomeController@showBook')->name('frontend.home.showBook');
     });
 
 

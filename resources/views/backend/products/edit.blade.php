@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-    create product
+    edit product
 @endsection
 
 @section('content')
@@ -14,13 +14,13 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Tạo sản phẩm</h1>
+                            <h1 class="m-0 text-dark">Sửa sản phẩm</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item"><a href="#">Sản phẩm</a></li>
-                                <li class="breadcrumb-item active">Tạo sản phẩm</li>
+                                <li class="breadcrumb-item active">Sửa sản phẩm</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -33,7 +33,7 @@
                             <!-- general form elements -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Tạo sản phẩm</h3>
+                                    <h3 class="card-title">Sửa sản phẩm</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
@@ -53,7 +53,7 @@
                                             <select class="form-control select2" style="width: 100%;" name="category_id">
                                                 <option>--Chọn danh mục---</option>
                                                 @foreach($categories as $cate)
-                                                    <option value="{{$cate->id}}">{{$cate->name}}</option>
+                                                    <option value="{{$cate->id}}" @if($cate->id==$book->category_id) selected @endif>{{$cate->name}}</option>
                                                 @endforeach
 
                                             </select>
