@@ -21,6 +21,9 @@ class CreateCategoriesTable extends Migration
             $table->string('slug');
             $table->integer('parent_id')->nullable();
             $table->integer('depth');
+            $table->integer('status');
+            $table->text('thumbnail');
+            $table->timestamp('deleteds_at')->nullable();
         });
     }
 

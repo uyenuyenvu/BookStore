@@ -181,6 +181,18 @@ class HomeController extends Controller
     {
         //
     }
+    public function showBooksByCategory($slug){
+        $category=Category::where('slug',$slug)->first();
+//        dd($category);
+        $books=$category->Books;
+//        dd($books);
+        return view('frontend.page.showBooksByCategory')->with([
+            'books'=>$books,
+            'category'=>$category
+        ]);
+
+
+    }
     //hiển thị trang about
     public function about(){
         return view('frontend.page.about');

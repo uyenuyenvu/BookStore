@@ -7,6 +7,7 @@
 @section('content')
     @include('frontend.include.slide')
     @include('frontend.include.banner')
+{{--    @dd($cart)--}}
     <!-- Shop Area Start -->
     <div class="shopping-area section-padding">
         <div class="container">
@@ -174,7 +175,7 @@
                                                 </a>
                                                 <div class="product-description">
                                                     <div class="functional-buttons">
-                                                        <a href="#" title="Add to Cart">
+                                                        <a href="{{route('frontend.home.addToCart',$book->id)}}" title="Add to Cart">
                                                             <i class="fa fa-shopping-cart"></i>
                                                         </a>
                                                         <a href="#" title="Add to Wishlist">
@@ -189,14 +190,21 @@
 
                                             <div class="banner-bottom text-center">
                                                 <div class="banner-bottom-title">
-                                                    <a href="#">{{$book->name}}</a>
+                                                    <a href="#"><b>{{$book->name}}</b></a>
                                                 </div>
-                                                <div class="rating-icon">
-                                                    <i class="fa fa-star icolor"></i>
-                                                    <i class="fa fa-star icolor"></i>
-                                                    <i class="fa fa-star icolor"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                               <div style="text-align: left; padding: 10px;">
+                                                   @if($book->sale_price<$book->origin_price)
+                                                       <strike style="font-size: 12px">{{number_format($book->origin_price)}} VNĐ</strike>
+                                                       <b style="color: red">{{number_format($book->sale_price)}} VNĐ</b>
+
+                                                       @else
+                                                   @endif
+                                               </div>
+                                                <div style="text-align: left; padding: 10px">
+                                                    <span>Tác giả: {{$book->author}}</span>
+                                                </div>
+                                                <div class="sold" style="text-align: right; padding:10px; font-size: 12px">
+                                                    <span>Đã bán: {{$book->number_sold}}</span>
                                                 </div>
                                             </div>
                                         </div>

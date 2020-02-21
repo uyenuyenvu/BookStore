@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/backend/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -45,7 +46,7 @@
     <script src="/backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
     <script src="/backend/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
+    <!-- Sparkline -->  
     <script src="/backend/plugins/sparklines/sparkline.js"></script>
     <!-- JQVMap -->
     <script src="/backend/plugins/jqvmap/jquery.vmap.min.js"></script>

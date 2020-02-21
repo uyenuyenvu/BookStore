@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Image;
 use App\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -22,13 +23,28 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(10);
-        $user=Auth::user();
 
-        return view('backend.products.index')->with([
-            'books'=> $books,
-            'user'=>$user
-        ]);
+        $user=Auth::user();
+        if($user->role===3) {
+            $books = Book::where([
+                'status'=>1,
+                'deleteds_at'=>null
+            ])->orderBy('created_at', 'DESC')->paginate(10);
+        }else{
+            $books= Book::where([
+                'user_id'=>$user->id,
+                'status'=>1,
+                'deleteds_at'=>null
+            ])
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
+        }
+
+            return view('backend.products.index')->with([
+                'books' => $books,
+                'user' => $user
+            ]);
+
     }
 
     /**
@@ -40,10 +56,14 @@ class BookController extends Controller
     {
         $user=Auth::user();
 //        dd($user);
+        $categories=Category::all();
+//        dd($categories);
         if($user->can('create'))
+
         $this->authorize('create',Book::class);
         return view('backend.products.create')->with([
-            'user'=>$user
+            'user'=>$user,
+            'categories'=>$categories
         ]);
 
 //        if ($user->can('update')) {
@@ -84,16 +104,32 @@ class BookController extends Controller
 //
         $book = new Book();
         $book->name = $request->get('name');
-//        $book->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $book->slug = \Illuminate\Support\Str::slug($request->get('name')).time();
         $book->category_id = $request->get('category_id');
         $book->origin_price = $request->get('origin_price');
         $book->sale_price = $request->get('sale_price');
         $book->content = $request->get('content');
         $book->publisher = $request->get('publisher');
         $book->author=$request->get('author');
+        $book->number_publish=$request->number_publish;
+        $book->size=$request->size;
+        $book->cover_type=$request->cover_type;
+        $book->number_pages=$request->number_pages;
+        $book->supplier=$request->supplier;
+        $book->number_import=$request->number_import;
+        $book->number_sold=0;
+        $book->status=0;
+        $book->description=$request->get('content');
+
 
 //        $book->status = 0;
         $book->user_id = Auth::user()->id;
+        $avatar=$request->file('avatar');
+        $avatar->store('image');
+        $name = date('YmdHis') ."." . $avatar->getClientOriginalExtension();
+        $avatar->move('backend/dist/img',$name);
+        $book->avatar=$name;
+
         $book->save();
         $img=new Image();
         $images = $request->file('images');
@@ -129,6 +165,13 @@ class BookController extends Controller
      */
     public function show($id)
     {
+//        $book=Book::find($id);
+////        dd($book);
+//        $id =  \Cart::add($book->id,"aaa",11,11,0);
+////        dd($id);
+//        $cart=\Cart::content();
+//        dd(\Cart::total());
+
         $book=Book::find($id);
         $user=Auth::user();
         $seller=User::find($book->user_id);
@@ -253,10 +296,42 @@ class BookController extends Controller
 //        $book=Book::find($id);
         $user=Auth::user();
         if ($user->can('delete', $book)) {
-            $book->delete();
-            return redirect()->route('backend.product.index');
+            $book->deleteds_at=now();
+            $book->save();
+            return redirect()->back();
         }else{
             return abort('404');
         }
+    }
+    public function cancelDelete($id){
+        $book=Book::find($id);
+        $book->deleteds_at=null;
+        $book->save();
+        return redirect()->back();
+    }
+    public function listApprove(){
+        $list=Book::where([
+            'status'=>0,
+            'deleteds_at'=>null
+        ])->orderBy('created_at','DESC')->paginate(10);
+
+        return view('backend.products.listApprove')->with([
+            'listApprove'=>$list,
+            'user'=>Auth::user()
+        ]);
+    }
+    public function listDeleted(){
+        $list=Book::where('deleteds_at','!=',null)->orderBy('created_at','DESC')->paginate(10);
+
+        return view('backend.products.listDeleted')->with([
+            'listDeleted'=>$list,
+            'user'=>Auth::user()
+        ]);
+    }
+    public function approved($id){
+        $book=Book::find($id);
+        $book->status=1;
+        $book->save();
+        return $this->listApprove();
     }
 }

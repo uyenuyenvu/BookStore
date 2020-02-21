@@ -128,4 +128,16 @@
     </div>
 </footer>
 <!-- Footer Area End -->
+<script src="{{asset("backend/plugins/jquery/jquery.min.js")}}"></script>
+<script src="{{asset("frontend/js/owl.carousel.min.js")}}"></script>
+<link rel="stylesheet" href="{{asset("frontend/css/owl.carousel.min.css")}}" />
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.header-menu-carousel').owlCarousel({
+            items :8,
+            dots: false,
+            pagination: false,
+        });
+    })
+</script>
 

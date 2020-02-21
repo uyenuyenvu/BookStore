@@ -38,6 +38,7 @@ class CreateBooksTable extends Migration
             $table->integer('supplier_id')->nullable();
             $table->integer('number_import')->comment('số lượng nhập về');
             $table->integer('number_sold')->comment('số lượng đã bán');
+            $table->text('avatar')->comment('ảnh đại diện của sách');
         });
     }
 

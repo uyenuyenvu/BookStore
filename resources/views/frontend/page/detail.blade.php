@@ -6,23 +6,7 @@
 
 @section('content')
 
-    <div class="breadcrumbs-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumbs">
-                        <h2>PRODUCT DETAILS</h2>
-                        <ul class="breadcrumbs-list">
-                            <li>
-                                <a title="Return to Home" href="index.html">Home</a>
-                            </li>
-                            <li>Product Details</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- Breadcrumbs Area Start -->
     <!-- Single Product Area Start -->
     <div class="single-product-area section-padding">
@@ -33,68 +17,64 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="one">
-                                <a class="venobox" href="{{asset('frontend/img/single-product/bg-1.jpg')}}" data-gall="gallery" title="">
-                                    <img src="{{asset('frontend/img/single-product/bg-1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="two">
-                                <a class="venobox" href="{{asset('frontend/img/single-product/bg-2.jpg')}}" data-gall="gallery" title="">
-                                    <img src="{{asset('frontend/img/single-product/bg-2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="three">
-                                <a class="venobox" href="{{asset('frontend/img/single-product/bg-3.jpg')}}" data-gall="gallery" title="">
-                                    <img src="{{asset('frontend/img/single-product/bg-3.jpg')}}" alt="">
+                                <a class="venobox" href="{{asset('backend/dist/img/'.$book->avatar)}}" data-gall="gallery" title="">
+                                    <img src="{{asset('backend/dist/img/'.$book->avatar)}}" alt="">
                                 </a>
                             </div>
                         </div>
                         <!-- Nav tabs -->
                         <ul class="product-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#one" aria-controls="one" role="tab" data-toggle="tab"><img src="{{asset('frontend/img/single-product/1.jpg')}}" alt=""></a></li>
-                            <li role="presentation"><a href="#two" aria-controls="two" role="tab" data-toggle="tab"><img src="{{asset('frontend/img/single-product/2.jpg')}}" alt=""></a></li>
-                            <li role="presentation"><a href="#three" aria-controls="three" role="tab" data-toggle="tab"><img src="{{asset('frontend/img/single-product/3.jpg')}}" alt=""></a></li>
+                            @php($i=0)
+                            @php(    $arr=['one','two','three','four','five']
+)
+                            @foreach($images as $image)
+                            <li role="presentation" @if($i===0) class="active" @endif><a href="#{{$arr[$i]}}" aria-controls="{{$arr[$i]}}" role="tab" data-toggle="tab"><img src="{{asset($image->folder.'/'.$image->name)}}" alt="" style="width: 150px; height: 160px"></a></li>
+                                @php($i++)
+                           @endforeach
+
                         </ul>
+
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-5">
                     <div class="single-product-details">
-                        <div class="list-pro-rating">
-                            <i class="fa fa-star icolor"></i>
-                            <i class="fa fa-star icolor"></i>
-                            <i class="fa fa-star icolor"></i>
-                            <i class="fa fa-star icolor"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <h2>Cold mountain</h2>
-                        <div class="availability">
-                            <span>In stock</span>
-                        </div>
+
+                        <h2>{{$book->name}}</h2>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
                         <div class="single-product-price">
-                            <h2>$49.66</h2>
+                            @if($book->sale_price<$book->origin_price)
+                                <h2 style="color: red">{{number_format($book->sale_price)}} VNĐ</h2>
+                                <p><strike style="font-size: 18px">{{number_format($book->origin_price)}} VNĐ</strike></p>
+
+                            @else
+                            @endif
+
                         </div>
                         <div class="product-attributes clearfix">
-                                <span class="pull-left" id="quantity-wanted-p">
-									<span class="dec qtybutton">-</span>
-									<input type="text" value="1" class="cart-plus-minus-box">
-									<span class="inc qtybutton">+</span>
-								</span>
+
                             <span>
-                                    <a class="cart-btn btn-default" href="cart.html">
+                                    <a class="cart-btn btn-default" href="{{route('frontend.home.addToCart',$book->id)}}">
                                         <i class="flaticon-shop"></i>
-                                        Add to cart
+                                        Thêm vào giỏ hàng
                                     </a>
                                </span>
                         </div>
-                        <div class="add-to-wishlist">
-                            <a class="wish-btn" href="cart.html">
-                                <i class="fa fa-heart-o"></i>
-                                ADD TO WISHLIST
-                            </a>
+
+                        <div class="single-product-categories">
+                            <label>Danh mục:</label>
+                            <span><a href="{{route('frontend.home.showBooksByCategory',$category->slug)}}">{{$category->name}}</a></span>
                         </div>
                         <div class="single-product-categories">
-                            <label>Categories:</label>
-                            <span>e-book, biological, business</span>
+                            <label>Tác giả:</label>
+                            <span><a href="#">{{$book->author}}</a></span>
+                        </div>
+                        <div class="single-product-categories">
+                            <label>Số lượng:</label>
+                            <span><a href="#">{{$book->number_import}}</a></span>
+                        </div>
+                        <div class="single-product-categories">
+                            <label>Đã bán:</label>
+                            <span><a href="#">{{$book->number_sold}}</a></span>
                         </div>
                         <div class="social-share">
                             <label>Share: </label>
@@ -119,30 +99,38 @@
                     <div class="p-details-tab-content">
                         <div class="p-details-tab">
                             <ul class="p-details-nav-tab" role="tablist">
-                                <li role="presentation" class="active"><a href="#more-info" aria-controls="more-info" role="tab" data-toggle="tab">Description</a></li>
-                                <li role="presentation"><a href="#data" aria-controls="data" role="tab" data-toggle="tab">Review</a></li>
+                                <li role="presentation"><a href="#more-info" aria-controls="more-info" role="tab" data-toggle="tab">Nội dung</a></li>
+                                <li role="presentation" class="active"><a href="#data" aria-controls="data" role="tab" data-toggle="tab">Thông tin</a></li>
                                 <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">Tab</a></li>
                             </ul>
                         </div>
                         <div class="clearfix"></div>
                         <div class="tab-content review">
-                            <div role="tabpanel" class="tab-pane active" id="more-info">
-                                <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
+                            <div role="tabpanel" class="tab-pane" id="more-info">
+                                <p>{!!$book->description!!}</p>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="data">
+                            <div role="tabpanel" class="tab-pane active" id="data">
                                 <table class="table-data-sheet">
                                     <tbody>
                                     <tr class="odd">
-                                        <td>author</td>
-                                        <td>Vu Thi Uyen</td>
+                                        <td>Nhà xuất bản</td>
+                                        <td>{{$book->publisher}}</td>
                                     </tr>
                                     <tr class="even">
-                                        <td>publisher</td>
-                                        <td>uyen</td>
+                                        <td>kích thước</td>
+                                        <td>{{$book->size}}</td>
                                     </tr>
                                     <tr class="odd">
-                                        <td>number publish</td>
-                                        <td>0</td>
+                                        <td>Số trang</td>
+                                        <td>{{$book->number_pages}}</td>
+                                    </tr>
+                                    <tr class="even">
+                                        <td>Số lần tái bản</td>
+                                        <td>{{$book->number_publish}}</td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>Loại bìa</td>
+                                        <td>{{$book->cover_type}}</td>
                                     </tr>
                                     </tbody>
                                 </table>

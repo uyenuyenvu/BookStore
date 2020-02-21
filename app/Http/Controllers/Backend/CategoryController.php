@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -33,7 +34,9 @@ class CategoryController extends Controller
         $category=Category::find($id);
         $books=$category->Books;
         return view('backend.categories.showBooks')->with([
-            'books'=>$books
+            'books'=>$books,
+            'user'=>Auth::user(),
+            'category'=>$category
         ]);
     }
 
@@ -80,6 +83,12 @@ class CategoryController extends Controller
          $category->parent_id=$request->parent_id;
         }
 //        dd($category);
+        $category->status=0;
+        $thumbnail=$request->file('thumbnail');
+        $thumbnail->store('image');
+        $name = date('YmdHis') ."." . $thumbnail->getClientOriginalExtension();
+        $thumbnail->move('backend/dist/img',$name);
+        $category->thumbnail=$name;
         $category->save();
         return redirect()->route('backend.category.index');
     }
@@ -92,7 +101,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category=Category::find($id);
+        return view('backend.categories.show')->with([
+            'category'=>$category,
+            'user'=>Auth::user()
+        ]);
     }
 
     /**

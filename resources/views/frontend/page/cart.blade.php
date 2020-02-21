@@ -1,3 +1,4 @@
+{{--@dd($cart)--}}
 @extends('frontend.layouts.master')
 
 @section('title')
@@ -14,86 +15,54 @@
                         <table>
                             <thead>
                             <tr>
-                                <th class="product-remove">Remove</th>
-                                <th class="product-image">Image</th>
-                                <th class="t-product-name">Product Name</th>
-                                <th class="product-edit">Edit</th>
-                                <th class="product-unit-price">Unit Price</th>
-                                <th class="product-quantity">Quantity</th>
-                                <th class="product-subtotal">Subtotal</th>
+                                <th class="product-remove">xóa</th>
+                                <th class="t-product-name">Tên sản phẩm</th>
+                                <th class="product-unit-price">Đơn giá</th>
+                                <th class="product-quantity">Số lượng</th>
+                                <th class="product-subtotal">Thành tiền</th>
                             </tr>
                             </thead>
                             <tbody>
+
+                            @foreach($cart as $book)
                             <tr>
                                 <td class="product-remove">
-                                    <a href="#">
+                                    <a href="{{route('frontend.home.remove',$book->rowId)}}">
                                         <i class="flaticon-delete"></i>
-                                    </a>
-                                </td>
-                                <td class="product-image">
-                                    <a href="#">
-                                        <img src="img/shop/1.jpg" alt="">
                                     </a>
                                 </td>
                                 <td class="t-product-name">
                                     <h3>
-                                        <a href="#">Cold mountain</a>
+                                        <a href="#">{{$book->name}}</a>
                                     </h3>
                                 </td>
-                                <td class="product-edit">
+                                <td class="product-unit-price">
                                     <p>
-                                        <a href="#">Edit</a>
+                                        {{number_format($book->price)}}
                                     </p>
                                 </td>
-                                <td class="product-unit-price">
-                                    <p>$ 100</p>
-                                </td>
                                 <td class="product-quantity product-cart-details">
-                                    <input type="number" value="1">
+                                    <a href="{{route('frontend.home.dec',$book->rowId)}}"><i class="fa fa-minus" style="margin: 5px"></i></a>
+
+                                    {{$book->qty}}
+                                    <a href="{{route('frontend.home.inc',$book->rowId)}}"><i class="fa fa-plus-square" style="margin: 5px"></i></a>
+
+
                                 </td>
                                 <td class="product-quantity">
-                                    <p>$ 100</p>
+                                    <p>{{number_format($book->price*$book->qty)}}</p>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="product-remove">
-                                    <a href="#">
-                                        <i class="flaticon-delete"></i>
-                                    </a>
-                                </td>
-                                <td class="product-image">
-                                    <a href="#">
-                                        <img src="img/shop/2.jpg" alt="">
-                                    </a>
-                                </td>
-                                <td class="t-product-name">
-                                    <h3>
-                                        <a href="#">East of eden</a>
-                                    </h3>
-                                </td>
-                                <td class="product-edit">
-                                    <p>
-                                        <a href="#">Edit</a>
-                                    </p>
-                                </td>
-                                <td class="product-unit-price">
-                                    <p>$ 100</p>
-                                </td>
-                                <td class="product-quantity product-cart-details">
-                                    <input type="number" value="1">
-                                </td>
-                                <td class="product-quantity">
-                                    <p>$ 100</p>
-                                </td>
-                            </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
                     <div class="shopingcart-bottom-area">
-                        <a class="left-shoping-cart" href="#">CONTINUE SHOPPING</a>
+                        <a class="left-shoping-cart" href="{{route('frontend.home.index')}}">Tiếp tục mua</a>
                         <div class="shopingcart-bottom-area pull-right">
-                            <a class="right-shoping-cart" href="#">CLEAR SHOPPING CART</a>
-                            <a class="right-shoping-cart" href="#">UPDATE SHOPPING CART</a>
+                            <a class="right-shoping-cart" href="#">Xóa toàn bộ giỏ hàng</a>
+
                         </div>
                     </div>
                 </div>
@@ -104,28 +73,16 @@
     <!-- Discount Area Start -->
     <div class="discount-area">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-sm-6">
-                    <div class="discount-main-area">
-                        <div class="discount-top">
-                            <h3>DISCOUNT CODE</h3>
-                            <p>Enter your coupon code if have one</p>
-                        </div>
-                        <div class="discount-middle">
-                            <input type="text" placeholder="">
-                            <a class="" href="#">APPLY COUPON</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-6">
+            <div class="row" >
+                <div class="col-md-6 col-sm-6" style="float: right">
                     <div class="subtotal-main-area">
                         <div class="subtotal-area">
-                            <h2>SUBTOTAL<span>$ 200</span></h2>
+                            <h2>Tạm tính<span>{{\Gloudemans\Shoppingcart\Facades\Cart::total()}}VNĐ</span></h2>
                         </div>
                         <div class="subtotal-area">
-                            <h2>GRAND TOTAL<span>$ 200</span></h2>
+                            <h2>Thành tiền<span>{{\Gloudemans\Shoppingcart\Facades\Cart::total()}}VNĐ</span></h2>
                         </div>
-                        <a href="#">CHECKOUT</a>
+                        <a href="{{route('backend.oder.checkout')}}">Đặt hàng</a>
                         <p>Checkout With Multiple Addresses</p>
                     </div>
                 </div>

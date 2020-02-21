@@ -108,7 +108,7 @@ body {
 /*----------------------------------------*/
 .header-logo > a {
     display: block;
-    padding: 25px 0;
+    padding: 5px 0;
 }
 .mainmenu nav ul#nav li {
     display: inline-block;
@@ -120,7 +120,7 @@ body {
     display: block;
     font-weight: 500;
     margin: 0;
-    padding: 40px 16px 40px 11px;
+    padding: 20px 16px 20px 11px;
     text-transform: uppercase;
 }
 .mainmenu nav ul#nav li::before {
@@ -189,7 +189,7 @@ body {
 }
 .header-right li {
     display: inline-block;
-    padding: 30px 4px;
+    padding: 17px 4px;
 }
 .header-right li a {
     display: block;
@@ -497,12 +497,14 @@ body {
     transition: .3s;
 }
 .single-shop-info {
-    color: #ffffff;
+    color: #23272b;
     text-align: center;
 }
 .shop-info-area {
     background: rgba(0, 0, 0, 0) url("img/shop-info-bg.jpg") no-repeat scroll center center;
+    background-size: contain;
     padding: 54px 0;
+    margin-bottom: 50px;
 }
 .shop-info-icon {
     background: #878787 none repeat scroll 0 0;

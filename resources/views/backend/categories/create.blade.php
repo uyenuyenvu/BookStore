@@ -37,7 +37,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" method="post" action="{{route('backend.category.store')}}">
+                                <form role="form" method="post" action="{{route('backend.category.store')}}"  enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="card-body">
@@ -54,7 +54,9 @@
                                                 <option value="0">--Chọn danh mục---</option>
 
                                                 @foreach($categories as $category)
+                                                    @if($category->depth===1)
                                                     <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    @endif
                                                     @endforeach
 
                                             </select>
@@ -75,16 +77,19 @@
 
 
                                         <div class="form-group">
-                                            <label for="exampleInputFile">Hình ảnh mo ta</label>
+                                            <label for="exampleInputFile">Hình ảnh mô tả</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                    <input type="file" name="thumbnail" class="custom-file-input" id="exampleInputFile" value="">
                                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                 </div>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="">Upload</span>
                                                 </div>
                                             </div>
+                                            @error('thumbnail')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                     </div>

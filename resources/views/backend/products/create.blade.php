@@ -52,7 +52,9 @@
                                 <label>Danh mục sản phẩm</label>
                                 <select class="form-control select2" style="width: 100%;" name="category_id">
                                     <option>--Chọn danh mục---</option>
-                                    <option value="1">truyện phiếm</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
 
                                 </select>
                                 @error('category_id')
@@ -95,11 +97,86 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row">
+                            <div class="form-group">
+                                <label>Số lần tái bản</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên NXB" name="number_publish">
+                                @error('number_publisher')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group">
+                                <label>Kích thước</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên NXB" name="size">
+                                @error('size')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group">
+                                <label>Loại bìa</label>
+                                <select class="form-control select2" style="width: 100%;" name="cover_type">
+                                    <option>--Chọn loại bìa---</option>
+
+                                        <option value="Cứng">Cứng</option>
+                                    <option value="Mềm">Mềm</option>
+
+                                    <option value="Lụa">Lụa</option>
+
+
+
+                                </select>
+                                @error('cover_type')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group">
+                                <label>Số trang</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên NXB" name="number_pages">
+                                @error('number_pages')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Nhà cung cấp</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên NXB" name="supplier">
+                                @error('supplier')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng nhập vào</label>
+                                <input type="text" class="form-control" id="" placeholder="Điền tên NXB" name="number_import">
+                                @error('number_import')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mô tả sản phẩm</label>
                                 <textarea class="textarea" placeholder="Place some text here"
                                           style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" name="content"></textarea>
                                 @error('content')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Hình ảnh đại diện sản phẩm</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="avatar" class="custom-file-input" id="exampleInputFile" value="">
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="">Upload</span>
+                                    </div>
+                                </div>
+                                @error('avatar')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

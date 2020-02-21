@@ -13,12 +13,19 @@ class CreateOdersTable extends Migration
     {
         Schema::create('oders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('customer_id');
-            $table->dateTime('date_oder');
-            $table->integer('payment');
-            $table->integer('status');
-            $table->string('node');
+            $table->integer('customer_id');
             $table->timestamps();
+            $table->text('customer_name');
+            $table->text('customer_phone');
+            $table->text('customer_address');
+            $table->text('mess')->nullable();
+            $table->text('shop_name')->nullable();
+            $table->text('shop_phone')->nullable();
+            $table->text('shop_address')->nullable();
+            $table->integer('total');
+            $table->integer('ship_total')->nullable();
+            $table->timestamp('time_finish')->nullable()->comment('thời gian giao hàng thành công');
+            $table->integer('status')->comment('0 là gửi yêu cầu cho người bán, 1 là người bán đã giao hàng, 2 là ship xong');
         });
     }
     /**

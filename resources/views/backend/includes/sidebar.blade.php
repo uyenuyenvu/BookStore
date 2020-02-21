@@ -52,7 +52,23 @@
                         <li class="nav-item">
                             <a href="{{ route('backend.product.index')  }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
+                                @if(\Illuminate\Support\Facades\Auth::user()->role===3)
+                                    <p>Tất cả sản phẩm</p>
+                                @else
+                                    <p>Sách của tôi</p>
+                                @endif
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.product.listApprove')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sản phẩm đợi duyệt</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.product.listDeleted')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Sách đã xóa</p>
                             </a>
                         </li>
 
@@ -94,6 +110,35 @@
                             <a href="{{ route('backend.user.index')  }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Quản lý đơn hàng
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('backend.oder.new')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đơn hàng mới</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.oder.shipping')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Đang giao hàng</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.statistics.oder')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Lịch sử</p>
                             </a>
                         </li>
                     </ul>

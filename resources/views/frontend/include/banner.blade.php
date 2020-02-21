@@ -1,8 +1,10 @@
 <div class="online-banner-area">
     <div class="container">
         <div class="banner-title text-center">
-            <h2>ONLINE <span>BOOK STORE</span></h2>
-            <p>The Online Books Guide is the biggest big store and the biggest books library in the world that has alot of the popular and the most top category books presented here. Top Authors are here just subscribe your email address and get updated with us.</p>
+            <h2>CỬA HÀNG SÁCH TRỰC TUYẾN</h2>
+            <p>
+             Sách trực tuyến là cửa hàng lớn nhất và thư viện sách lớn nhất trên thế giới có rất nhiều sách phổ biến và thuộc loại hàng đầu nhất được trình bày ở đây. Các tác giả hàng đầu ở đây chỉ cần đăng ký địa chỉ email của bạn và được cập nhật với chúng tôi.
+            </p>
         </div>
         <div class="row">
             <div class="banner-list">
@@ -13,7 +15,7 @@
                         </a>
                         <div class="price"><span>$</span>160</div>
                         <div class="banner-bottom text-center">
-                            <a href="#">NEW RELEASE 2016</a>
+                            <a href="#">XU HƯỚNG 2020</a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +26,7 @@
                         </a>
                         <div class="price"><span>$</span>160</div>
                         <div class="banner-bottom text-center">
-                            <a href="#">NEW RELEASE 2016</a>
+                            <a href="#">XU HƯỚNG 2020</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +37,7 @@
                         </a>
                         <div class="price"><span>$</span>160</div>
                         <div class="banner-bottom text-center">
-                            <a href="#">NEW RELEASE 2016</a>
+                            <a href="#">XU HƯỚNG 2020</a>
                         </div>
                     </div>
                 </div>

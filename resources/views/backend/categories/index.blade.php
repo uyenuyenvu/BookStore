@@ -44,6 +44,27 @@
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
+                                <div id="accordion">
+                                    @foreach($category as $key)
+                                    <div class="card">
+                                        <div class="card-header" id="heading{{$key->id}}">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$key->id}}" aria-expanded="true" aria-controls="collapse{{$key->id}}">
+                                                    {{$key->name}}
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapse{{$key->id}}" class="collapse show" aria-labelledby="heading{{$key->id}}" data-parent="#accordion">
+                                            <div class="card-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                        @endforeach
+                                </div>
+                                {!! $category->links() !!}
+
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover">
                                         <thead>
@@ -61,7 +82,8 @@
                                             <td>{{$key->name}}</td>
 
                                             <td>{{$key->description}}</td>
-                                            <td><a href="{{route('backend.category.edit',$key->id)}}" class="btn btn-light">edit</a> </td>
+                                            <td><a href="{{route('backend.category.edit',$key->id)}}" class="btn btn-light">sửa</a>
+                                                <a href="{{route('backend.category.show',$key->id)}}" class="btn btn-light">xem</a></td>
                                         </tr>
                                         @endforeach
                                         </tbody>
