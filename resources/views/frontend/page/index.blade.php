@@ -5,159 +5,158 @@
 @endsection
 
 @section('content')
+    @if(\Illuminate\Support\Facades\Session::get('waite')!=null)
+    <div class="alert alert-success" role="alert" style="margin-top: 50px;">
+        {{\Illuminate\Support\Facades\Session::get('waite')}}
+    </div>
+    @endif
     @include('frontend.include.slide')
-    @include('frontend.include.banner')
+{{--    @include('frontend.include.banner')--}}
 {{--    @dd($cart)--}}
     <!-- Shop Area Start -->
+
     <div class="shopping-area section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <div class="shop-widget">
-                        <div class="shop-widget-top">
-                            <aside class="widget widget-categories">
-                                <h2 class="sidebar-title text-center">CATEGORY</h2>
-                                <ul class="sidebar-menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-angle-double-right"></i>
-                                            LEARNING
-                                            <span>(5)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-angle-double-right"></i>
-                                            LIGHTING
-                                            <span>(8)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-angle-double-right"></i>
-                                            LIVING ROOMS
-                                            <span>(4)</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-angle-double-right"></i>
-                                            LAMP
-                                            <span>(7)</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="widget shop-filter">
-                                <h2 class="sidebar-title text-center">PRICE SLIDER</h2>
-                                <div class="info-widget">
-                                    <div class="price-filter">
-                                        <div id="slider-range"></div>
-                                        <div class="price-slider-amount">
-                                            <input type="text" id="amount" name="price"  placeholder="Add Your Price" />
-                                            <div class="widget-buttom">
-                                                <input type="submit"  value="Filter"/>
-                                                <input type="reset" value="CLEAR" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </aside>
-                        </div>
-                        <div class="shop-widget-bottom">
-                            <aside class="widget widget-tag">
-                                <h2 class="sidebar-title">POPULAR TAG</h2>
-                                <ul class="tag-list">
-                                    <li>
-                                        <a href="#">e-book</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">writer</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">book’s</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">eassy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">nice</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">author</a>
-                                    </li>
-                                </ul>
-                            </aside>
-                            <aside class="widget widget-seller">
-                                <h2 class="sidebar-title">TOP SELLERS</h2>
-                                <div class="single-seller">
-                                    <div class="seller-img">
-                                        <img src="{{asset('/frontend/img/shop/1.jpg')}}" alt="" />
-                                    </div>
-                                    <div class="seller-details">
-                                        <a href="shop.html"><h5>Cold mountain</h5></a>
-                                        <h5>$ 50.00</h5>
-                                        <ul>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="single-seller">
-                                    <div class="seller-img">
-                                        <img src="{{asset('/frontend/img/shop/2.jpg')}}" alt="" />
-                                    </div>
-                                    <div class="seller-details">
-                                        <a href=""><h5>The historian</h5></a>
-                                        <h5>$ 50.00</h5>
-                                        <ul>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                            <li><i class="fa fa-star icolor"></i></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </aside>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-9 col-sm-9 col-xs-12">
+{{--                <div class="col-md-3 col-sm-3 col-xs-12">--}}
+{{--                    <div class="shop-widget">--}}
+{{--                        <div class="shop-widget-top">--}}
+{{--                            <aside class="widget widget-categories">--}}
+{{--                                <h2 class="sidebar-title text-center">CATEGORY</h2>--}}
+{{--                                <ul class="sidebar-menu">--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">--}}
+{{--                                            <i class="fa fa-angle-double-right"></i>--}}
+{{--                                            LEARNING--}}
+{{--                                            <span>(5)</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">--}}
+{{--                                            <i class="fa fa-angle-double-right"></i>--}}
+{{--                                            LIGHTING--}}
+{{--                                            <span>(8)</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">--}}
+{{--                                            <i class="fa fa-angle-double-right"></i>--}}
+{{--                                            LIVING ROOMS--}}
+{{--                                            <span>(4)</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">--}}
+{{--                                            <i class="fa fa-angle-double-right"></i>--}}
+{{--                                            LAMP--}}
+{{--                                            <span>(7)</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </aside>--}}
+{{--                            <aside class="widget shop-filter">--}}
+{{--                                <h2 class="sidebar-title text-center">PRICE SLIDER</h2>--}}
+{{--                                <div class="info-widget">--}}
+{{--                                    <div class="price-filter">--}}
+{{--                                        <div id="slider-range"></div>--}}
+{{--                                        <div class="price-slider-amount">--}}
+{{--                                            <input type="text" id="amount" name="price"  placeholder="Add Your Price" />--}}
+{{--                                            <div class="widget-buttom">--}}
+{{--                                                <input type="submit"  value="Filter"/>--}}
+{{--                                                <input type="reset" value="CLEAR" />--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </aside>--}}
+{{--                        </div>--}}
+{{--                        <div class="shop-widget-bottom">--}}
+{{--                            <aside class="widget widget-tag">--}}
+{{--                                <h2 class="sidebar-title">POPULAR TAG</h2>--}}
+{{--                                <ul class="tag-list">--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">e-book</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">writer</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">book’s</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">eassy</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">nice</a>--}}
+{{--                                    </li>--}}
+{{--                                    <li>--}}
+{{--                                        <a href="#">author</a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </aside>--}}
+{{--                            <aside class="widget widget-seller">--}}
+{{--                                <h2 class="sidebar-title">TOP SELLERS</h2>--}}
+{{--                                <div class="single-seller">--}}
+{{--                                    <div class="seller-img">--}}
+{{--                                        <img src="{{asset('/frontend/img/shop/1.jpg')}}" alt="" />--}}
+{{--                                    </div>--}}
+{{--                                    <div class="seller-details">--}}
+{{--                                        <a href="shop.html"><h5>Cold mountain</h5></a>--}}
+{{--                                        <h5>$ 50.00</h5>--}}
+{{--                                        <ul>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                        </ul>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="single-seller">--}}
+{{--                                    <div class="seller-img">--}}
+{{--                                        <img src="{{asset('/frontend/img/shop/2.jpg')}}" alt="" />--}}
+{{--                                    </div>--}}
+{{--                                    <div class="seller-details">--}}
+{{--                                        <a href=""><h5>The historian</h5></a>--}}
+{{--                                        <h5>$ 50.00</h5>--}}
+{{--                                        <ul>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                            <li><i class="fa fa-star icolor"></i></li>--}}
+{{--                                        </ul>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </aside>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+                <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="shop-tab-area">
                         <div class="shop-tab-list">
                             <div class="shop-tab-pill pull-left">
-                                <ul>
-                                    <li class="active" id="left"><a data-toggle="pill" href="#home"><i class="fa fa-th"></i><span>Grid</span></a></li>
-                                    <li><a data-toggle="pill" href="#menu1"><i class="fa fa-th-list"></i><span>List</span></a></li>
-                                </ul>
+{{--                                <nav class="navbar navbar-light bg-light">--}}
+                                    <form class="form-inline" method="post" action="{{route('frontend.home.search')}}">
+                                        @csrf
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+{{--                                </nav>--}}
                             </div>
                             <div class="shop-tab-pill pull-right">
                                 <ul>
+
                                     <li class="product-size-deatils">
-                                        <div class="show-label">
-                                            <label>Show : </label>
-                                            <select>
-                                                <option value="10" selected="selected">10</option>
-                                                <option value="09">09</option>
-                                                <option value="08">08</option>
-                                                <option value="07">07</option>
-                                                <option value="06">06</option>
-                                            </select>
-                                        </div>
+                                        <a href="/home?price=min">Giá thấp</a>
                                     </li>
                                     <li class="product-size-deatils">
-                                        <div class="show-label">
-                                            <label><i class="fa fa-sort-amount-asc"></i>Sort by : </label>
-                                            <select>
-                                                <option value="position" selected="selected">Position</option>
-                                                <option value="Name">Name</option>
-                                                <option value="Price">Price</option>
-                                            </select>
-                                        </div>
+                                        <a href="/home?price=max">Giá cao</a>
+
+                                    </li>
+                                    <li class="product-size-deatils">
+                                        <a href="/home?sold=max">Bán chạy</a>
+
                                     </li>
 
                                 </ul>
@@ -167,11 +166,11 @@
                             <div class="row tab-pane fade in active" id="home">
                                 <div class="shop-single-product-area">
                                     @foreach($books as $book)
-                                    <div class="col-md-4 col-sm-6">
-                                        <div class="single-banner">
-                                            <div class="product-wrapper">
+                                    <div class="col-md-3 col-sm-3">
+                                        <div class="single-banner card" style="width: 100%">
+                                            <div class="product-wrapper" style="height: 250px">
                                                 <a href="{{route('frontend.home.showBook',$book->slug)}}" class="single-banner-image-wrapper">
-                                                    <img alt="" src="{{asset('/frontend/img/featured/1.jpg')}}">
+                                                    <img class="card-img" alt="" src="{{asset('/backend/dist/img/'.$book->avatar)}}" style="height: 250px">
                                                 </a>
                                                 <div class="product-description">
                                                     <div class="functional-buttons">
@@ -276,8 +275,8 @@
         </div>
     </div>
 
-            @include('frontend.include.laster_blog')
-        @include('frontend.include.comment_client')
+{{--            @include('frontend.include.laster_blog')--}}
+{{--        @include('frontend.include.comment_client')--}}
         @include('frontend.include.counter')
         @include('frontend.include.shop_infor')
         @include('frontend.include.letter')

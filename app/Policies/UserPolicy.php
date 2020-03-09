@@ -39,9 +39,9 @@ class UserPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, User $model)
     {
-        //
+        return $user->role===3;
     }
 
     /**
@@ -56,7 +56,7 @@ class UserPolicy
 //    }
     public function update(User $user, User $model)
     {
-        return $user->id===$model->id;
+        return $user->id===$model->id or $user->role===3;
     }
 
     /**

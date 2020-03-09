@@ -37,7 +37,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" action="{{route('backend.user.update',$user->id)}}" method="post">
+                                <form role="form" action="{{route('backend.user.update',$user->id)}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group">
@@ -61,13 +61,21 @@
                                             <input type="password" class="form-control" id="" name="password">
                                         </div>
                                         <div class="form-group">
-                                            <label>Quyền</label>
-                                            <select class="form-control select2" style="width: 100%;" name="role">
-                                                <option value="0">--Chọn quyền---</option>
-                                                <option value="0" @if($user->role==0) selected @endif>mua sách</option>
-                                                <option value="1" @if($user->role==1) selected @endif>Bán sách</option>
-                                            </select>
+                                            <label for="exampleInputFile">Hình ảnh đại diện</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="avatar" class="custom-file-input" id="exampleInputFile" value="">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="">Upload</span>
+                                                </div>
+                                            </div>
+                                            @error('avatar')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
+
                                     </div>
                                     <!-- /.card-body -->
 

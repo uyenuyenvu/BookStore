@@ -11,7 +11,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div class="single-banner">
                         <a href="#">
-                            <img src="{{asset('/frontend/img/banner/1.jpg')}}" alt="">
+                            <img src="{{asset('/frontend/img/banner/2.jpg')}}" alt="">
                         </a>
                         <div class="price"><span>$</span>160</div>
                         <div class="banner-bottom text-center">
@@ -33,7 +33,7 @@
                 <div class="col-md-4 hidden-sm">
                     <div class="single-banner">
                         <a href="#">
-                            <img src="{{asset('/frontend/img/banner/3.jpg')}}" alt="">
+                            <img src="{{asset('/frontend/img/banner/2.jpg')}}" alt="">
                         </a>
                         <div class="price"><span>$</span>160</div>
                         <div class="banner-bottom text-center">

@@ -52,7 +52,7 @@
                                     Ghi chú
                                 </td>
                                 <td  style="padding: 10px">
-                                    <textarea name="" id="" rows="5" style="width: 100%" name="mess"></textarea>
+                                    <textarea name="mess" id="" rows="5" style="width: 100%" name="mess"></textarea>
                                 </td>
                             </tr>
                             <tr>

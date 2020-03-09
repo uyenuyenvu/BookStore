@@ -27,52 +27,34 @@
                 <!-- Content -->
                 <div class="container-fluid">
                     <!-- Main row -->
-                    <div class="row">
+                    <div class="row" style="text-align: center;">
+                        <div class="col-6 col-md-6 col-sm-6" style="padding: 30px; border: 1px solid grey; float: left">
+                            <img src="{{asset('backend/dist/img/'.$userr->avatar)}}" alt="" style="width: 100px; height: 100px; border-radius: 50%">
+                            <h2>{{$userr->name}}</h2>
+                            <div style="text-align: left">
+                                <p>ID: <b>{{$userr->id}}</b></p>
+                                <p>Email: <b>{{$userr->email}}</b></p>
+                                @if($shop)
+                                    <p>SDT: <b>{{$shop->phone}}</b></p>
+                                    <p>Địa chỉ: <b>{{$shop->address}}</b></p>
+                                    @else
+                                    <p>SDT: <b>{{$userr->phone}}</b></p>
+                                    <p>Địa chỉ: <b>{{$userr->address}}</b></p>
+                                    @endif
+                                @if($userr->role>1 )
 
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">Trang cá nhân</h3>
+                                     <p>Là tài khoản bán hàng</p>
+                                @else
 
-                                    <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <a href="{{route('backend.user.edit',$user->id)}}">Cập nhật</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>{{$user->id}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th>tên</th>
-                                            <th>{{$user->name}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th>sdt</th>
-                                            <th>{{$user->phone}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th>email</th>
-                                            <th>{{$user->email}}</th>
-                                        </tr>
-                                        <tr>
-                                            <th>địa chỉ</th>
-                                            <th>{{$user->address}}</th>
-                                        </tr>
-                                        </thead>
+                                    <p>LÀ tài khoản mua hàng</p>
+                            @endif
+                                <a href="{{route('backend.user.edit',$userr->id)}}" class="btn btn-success">sửa</a>
+                                <a href="{{route('backend.user.destroy',$userr->id)}}" class="btn btn-danger">xóa</a>
 
-                                    </table>
-                                    {{--                                    {!! $category->links() !!}--}}
-                                </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
                         </div>
+
+
                     </div>
                     <!-- /.row (main row) -->
                 </div><!-- /.container-fluid -->

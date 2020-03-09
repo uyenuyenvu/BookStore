@@ -76,6 +76,34 @@ class HomeController extends Controller
 //        return 1;
 
             $books = \DB::table('books')->paginate(10);
+        $books = Book::where([
+            'status'=>1,
+            'deleteds_at'=>null
+        ])->orderBy('created_at', 'DESC')->paginate(10);
+        if(isset($_GET['price'])){
+            if($_GET['price']==='min'){
+//                $books = \DB::table('books')->paginate(10);
+                $books = Book::where([
+                    'status'=>1,
+                    'deleteds_at'=>null
+                ])->orderBy('sale_price', 'ASC')->paginate(10);
+            }else{
+                $books = \DB::table('books')->paginate(10);
+                $books = Book::where([
+                    'status'=>1,
+                    'deleteds_at'=>null
+                ])->orderBy('sale_price', 'DESC')->paginate(10);
+            }
+
+        }
+        if(isset($_GET['sold'])){
+
+//                $books = \DB::table('books')->paginate(10);
+                $books = Book::where([
+                    'status'=>1,
+                    'deleteds_at'=>null
+                ])->orderBy('number_sold', 'DESC')->paginate(10);
+            }
 
         return view('frontend.page.index')->with([
             'books'=> $books
@@ -89,6 +117,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(Request $request){
+        $books=Book::where('name','like',"%{$request->search}%")
+            ->orwhere('author','like',"%{$request->search}%")
+            ->paginate(10);
+//        dd($books);
+        return view('frontend.page.index')->with([
+            'books'=> $books
+        ]);
+    }
     public function create()
     {
         //
@@ -118,11 +155,14 @@ class HomeController extends Controller
         $user = Auth::user();
         $seller = \App\User::find($book->user_id);
         $category = Category::find($book->category_id);
+        $books=Book::where('category_id',$category->id)->get();
+//        dd($books);
         $images = $book->Images;
 //        dd($images);
         if($user!=null) {
             if ($user->role == 1) {
                 return view('frontend.page.detail')->with([
+                    'books'=>$books,
                     'book' => $book,
                     'user' => $user,
                     'seller' => $seller,
@@ -131,6 +171,8 @@ class HomeController extends Controller
                 ]);
             } else {
                 return view('backend.products.show')->with([
+                    'books'=>$books,
+
                     'book' => $book,
                     'user' => $user,
                     'seller' => $seller,
@@ -140,6 +182,8 @@ class HomeController extends Controller
             }
         }else{
             return view('frontend.page.detail')->with([
+                'books'=>$books,
+
                 'book' => $book,
                 'seller' => $seller,
                 'category' => $category,

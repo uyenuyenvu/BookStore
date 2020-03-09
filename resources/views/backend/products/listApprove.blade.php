@@ -74,10 +74,10 @@
                                                 <td>
                                                     <a href="{{route('backend.product.show',$key->id)}}" class="btn btn-light">xem</a>
                                                     @can("edit",$key)
-                                                        <a href="{{route('backend.product.edit',$key)}}" class="btn btn-light">sửa</a>
+                                                        <a href="{{route('backend.product.edit',$key)}}" class="btn btn-warning">sửa</a>
 
-                                                        <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-light">xóa</a>
-                                                        <a href="{{route('backend.product.approved',$key->id)}}" class="btn btn-light">duyệt</a>
+                                                        <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-danger">xóa</a>
+                                                        <a href="{{route('backend.product.approved',$key->id)}}" class="btn btn-success">duyệt</a>
 
 
 

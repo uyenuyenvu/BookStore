@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -52,14 +53,23 @@ class LoginController extends Controller
         $email = $request->get('email');
         $password = $request->get('password');
 //        dd(Auth::attempt(['email' => $email, 'password' => $password, 'role' => 1]));
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 2])) {
-            // email admin mới được xác thực thành công
-            return redirect()->intended('/admin');
-        }
+
         if (Auth::attempt(['email' => $email, 'password' => $password, 'role' => 1])) {
             // email admin mới được xác thực thành công
             return redirect()->intended('/');
         }
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // email admin mới được xác thực thành công
+            return redirect()->intended('/admin');
+        }
+
+//        if($user->password===md5($password) and $user->rolde===1){
+//            return redirect()->intended('/');
+//        }
+//        if($user->password===md5($password)){
+//            return redirect()->intended('/admin');
+//        }
+
 
 
     }

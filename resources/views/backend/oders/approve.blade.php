@@ -84,14 +84,14 @@
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item">
                                                             Tên shop:
-                                                            <input type="text" class="form-control"   name="shop_name">
+                                                            <input type="text" class="form-control"   name="shop_name" value="{{$shop->name}}">
 
                                                         </li>
                                                         <li class="list-group-item">
-                                                            Sđt: <input type="text" class="form-control"  name="shop_phone">
+                                                            Sđt: <input type="text" class="form-control"  name="shop_phone"  value="{{$shop->phone}}" >
                                                         </li>
                                                         <li class="list-group-item">
-                                                            Địa chỉ: <input type="text" class="form-control"  name="shop_address">
+                                                            Địa chỉ: <input type="text" class="form-control"  name="shop_address"  value="{{$shop->address}}">
                                                         </li>
                                                     </ul>
                                                     <button type="submit" class="btn btn-success" style="float: right">Xác nhận</button>

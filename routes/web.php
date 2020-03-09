@@ -12,8 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view("frontend.page.blank");
-//    return redirect('/home');
+    return redirect('/home');
 });
 Route::group([
     'namespace' => 'Backend',
@@ -41,10 +40,19 @@ Route::group([
         Route::get('/', 'UserController@index')->name('backend.user.index');
         Route::get('/edit/{id}', 'UserController@edit')->name('backend.user.edit');
         Route::get('/show/{id}', 'UserController@show')->name('backend.user.show');
-
+        Route::get('/create','UserController@create')->name('backend.user.create');
+        Route::post('/store','UserController@store')->name('backend.user.store');
         Route::get('/showBooks/{id}', 'UserController@showBooks')->name('backend.user.showBooks');
         Route::get('/destroy/{id}', 'UserController@destroy')->name('backend.user.destroy');
         Route::post('/update/{id}','UserController@update')->name('backend.user.update');
+        Route::get('/formUpgrade/{id}','UserController@formUpgrade')->name('backend.user.formUpgrade');
+        Route::post('/storeShop','UserController@storeShop')->name('backend.user.storeShop');
+        Route::get('/listUpgrade','UserController@listUpgrade')->name('backend.user.listUpgrade');
+        Route::get('/listShop','UserController@listShop')->name('backend.user.listShop');
+        Route::get('/listDeletedShop','UserController@listDeletedShop')->name('backend.user.listDeletedShop');
+        Route::get('/upgrade/{id}','UserController@upgrade')->name('backend.user.upgrade');
+        Route::get('/showShop/{id}','UserController@showShop')->name('backend.user.showShop');
+        Route::get('/destroyShop/{id}','UserController@destroyShop')->name('backend.user.destroyShop');
 
     });
     //quản lí danh muc
@@ -56,6 +64,7 @@ Route::group([
         Route::get('/edit/{id}', 'CategoryController@edit')->name('backend.category.edit');
         Route::get('/showBooks/{id}', 'CategoryController@showBooks')->name('backend.category.showBooks');
         Route::get('/show/{id}','CategoryController@show')->name('backend.category.show');
+        Route::get('/destroy/{id}','CategoryController@destroy')->name('backend.category.destroy');
     });
     //quản lí don hang
     Route::group(['prefix' => 'orders'], function(){
@@ -69,11 +78,14 @@ Route::group([
         Route::get('/ship/{id}','OderController@ship')->name('backend.oder.ship');
         Route::get('/finish/{id}','OderController@finish')->name('backend.oder.finish');
         Route::get('/shipping','OderController@shipping')->name('backend.oder.shipping');
+        Route::get('/showOders/{id}','OderController@showOders')->name('backend.oder.showOders');
+
 
 
     });
     Route::group(['prefix'=>'statistics'],function(){
        Route::get('/oder','OderController@statistics')->name('backend.statistics.oder');
+       Route::get('/chart/{month}/{year}','OderController@chart');
     });
 });
 Auth::routes();
@@ -95,6 +107,7 @@ Route::group([
         Route::get('/inc/{id}','CartController@inc')->name('frontend.home.inc');
         Route::get('/dec/{id}','CartController@dec')->name('frontend.home.dec');
         Route::get('/listBooks/{slug}','HomeController@showBooksByCategory')->name('frontend.home.showBooksByCategory');
+        Route::post('/search','HomeController@search')->name('frontend.home.search');
     });
 
 

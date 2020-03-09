@@ -41,7 +41,7 @@ class BookPolicy
      */
     public function create(User $user)
     {
-        return $user->role;
+        return $user->role===3;
     }
 
     /**
@@ -53,12 +53,12 @@ class BookPolicy
      */
     public function update(User $user, Book $book)
     {
-        return $user->id === $book->user_id;
+        return $user->id === $book->user_id or $user->role===3;
     }
 
     public function edit(User $user, Book $book)
     {
-        return $user->id === $book->user_id;
+        return $user->id === $book->user_id or $user->role===3;
     }
 
     /**
@@ -70,7 +70,7 @@ class BookPolicy
      */
     public function delete(User $user, Book $book)
     {
-        return $user->id === $book->user_id;
+        return $user->id === $book->user_id or $user->role===3;
 
     }
 
@@ -84,6 +84,9 @@ class BookPolicy
     public function restore(User $user, Book $book)
     {
         //
+    }
+    public function approve(User $user, Book $book){
+        return $user->role===3;
     }
 
     /**

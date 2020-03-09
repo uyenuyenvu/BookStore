@@ -146,6 +146,61 @@
             </div>
         </div>
     </div>
+    <div class="featured-product-area section-padding">
+        <h2 class="section-title">Sản phẩm cùng danh mục</h2>
+        <div class="container">
+            <div class="row">
+                <div class="product-list tab-content">
+                    @foreach($books as $bookk)
+                        <div class="col-md-3 col-sm-3">
+                            <div class="single-banner card" style="width: 100%">
+                                <div class="product-wrapper" style="height: 250px">
+                                    <a href="{{route('frontend.home.showBook',$bookk->slug)}}" class="single-banner-image-wrapper">
+                                        <img class="card-img" alt="" src="{{asset('/backend/dist/img/'.$bookk->avatar)}}" style="height: 250px">
+                                    </a>
+                                    <div class="product-description">
+                                        <div class="functional-buttons">
+                                            <a href="{{route('frontend.home.addToCart',$bookk->id)}}" title="Add to Cart">
+                                                <i class="fa fa-shopping-cart"></i>
+                                            </a>
+                                            <a href="#" title="Add to Wishlist">
+                                                <i class="fa fa-heart-o"></i>
+                                            </a>
+                                            <a href="#" title="Quick view" data-toggle="modal" data-target="#productModal">
+                                                <i class="fa fa-compress"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="banner-bottom text-center">
+                                    <div class="banner-bottom-title">
+                                        <a href="#"><b>{{$bookk->name}}</b></a>
+                                    </div>
+                                    <div style="text-align: left; padding: 10px;">
+                                        @if($bookk->sale_price<$book->origin_price)
+                                            <strike style="font-size: 12px">{{number_format($bookk->origin_price)}} VNĐ</strike>
+                                            <b style="color: red">{{number_format($bookk->sale_price)}} VNĐ</b>
+
+                                        @else
+                                        @endif
+                                    </div>
+                                    <div style="text-align: left; padding: 10px">
+                                        <span>Tác giả: {{$bookk->author}}</span>
+                                    </div>
+                                    <div class="sold" style="text-align: right; padding:10px; font-size: 12px">
+                                        <span>Đã bán: {{$bookk->number_sold}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Quickview Product Start -->
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+    </div>
     @include('frontend.include.shop_infor')
     @endsection
 

@@ -55,7 +55,7 @@
                                                 </h5>
                                             </div>
 
-                                            <div id="collapse{{$key->id}}" class="collapse show" aria-labelledby="heading{{$key->id}}" data-parent="#accordion">
+                                            <div id="collapse{{$key->id}}" class="collapse" aria-labelledby="heading{{$key->id}}" data-parent="#accordion">
                                                 <div class="card-body" >
                                                     <div class="customer col-5 col-md-5 col-sm-5 card" style="float: left">
                                                         <div class="card-header">

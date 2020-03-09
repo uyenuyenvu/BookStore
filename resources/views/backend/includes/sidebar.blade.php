@@ -12,7 +12,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="/backend/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="{{asset('backend/dist/img/'.$user->avatar)}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="{{route('backend.user.show',$user->id)}}" class="d-block">{{$user->name}}</a>
@@ -59,12 +59,14 @@
                                 @endif
                             </a>
                         </li>
+                       @if(\Illuminate\Support\Facades\Auth::user()->role===3)
                         <li class="nav-item">
                             <a href="{{ route('backend.product.listApprove')  }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sản phẩm đợi duyệt</p>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a href="{{ route('backend.product.listDeleted')  }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -84,7 +86,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('backend.category.store')  }}" class="nav-link">
+                            <a href="{{ route('backend.category.create')  }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tạo mới</p>
                             </a>
@@ -110,6 +112,31 @@
                             <a href="{{ route('backend.user.index')  }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Danh sách</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.user.create')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>tạo mới người dùng</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('backend.user.listUpgrade')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Yêu cầu nâng cấp</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.user.listShop')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Quản lí shop</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('backend.user.listDeletedShop')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>shop ngừng hoạt động</p>
                             </a>
                         </li>
                     </ul>
@@ -147,6 +174,25 @@
                     <a href="/logout" class="nav-link">
                         Đăng xuất
                     </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <p>
+                            Quản lý thống kê
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
+
+                        <li class="nav-item">
+                            <a href="{{ route('backend.statistics.oder')  }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Thống kê theo doanh thu</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

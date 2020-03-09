@@ -28,12 +28,7 @@
     <link rel="stylesheet" href="/backend/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-    @include('backend.includes.sidebar')
-    @include('backend.includes.navbar')
-    @yield('content')
-    @include('backend.includes.footer')
+
     <!-- jQuery -->
     <script src="/backend/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -46,8 +41,9 @@
     <script src="/backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
     <script src="/backend/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->  
-    <script src="/backend/plugins/sparklines/sparkline.js"></script>
+    <!-- Sparkline -->
+
+    <script src="{{asset('/backend/plugins/sparklines/sparkline.js')}}"></script>
     <!-- JQVMap -->
     <script src="/backend/plugins/jqvmap/jquery.vmap.min.js"></script>
     <script src="/backend/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
@@ -68,5 +64,12 @@
     <script src="/backend/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/backend/dist/js/demo.js"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    @include('backend.includes.sidebar')
+    @include('backend.includes.navbar')
+    @yield('content')
+    @include('backend.includes.footer')
+
 </body>
 </html>

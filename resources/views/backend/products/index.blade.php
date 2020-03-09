@@ -67,21 +67,24 @@
 {{--                                {{dd($key)}}--}}
                             <tr>
                                 <td>{{ $key->id  }}</td>
-                                <td>{{ $key->name  }}</td>
+                                <td>
+                                <a href="{{route('backend.product.show',$key->id)}}">
+                                    <p style="font-weight: bold; color: black">{{ $key->name  }}</p>
+                                </a></td>
 
                                 <td>{{ $key->origin_price  }}</td>
                                 <td>{{ $key->sale_price  }}</td>
                                 <td>
-                                    <a href="{{route('backend.product.show',$key->id)}}" class="btn btn-light">xem</a>
                                @can("edit",$key)
-                                <a href="{{route('backend.product.edit',$key)}}" class="btn btn-light">sửa</a>
+                                <a href="{{route('backend.product.edit',$key)}}" class="btn btn-warning">sửa</a>
 
-                                    <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-light">xóa</a>
+                                    <a href="{{route('backend.product.destroy',$key->id)}}" class="btn btn-danger">xóa</a>
 
 
                                     @endcan
                                 </td>
                             </tr>
+
 
 @endforeach
 

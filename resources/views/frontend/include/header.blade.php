@@ -103,21 +103,21 @@
 
                                 </ul>
                             </li>
-                            <li><a href="shop.html">ĐẶC SẮC</a></li>
+                            <li><a href="/home?sold=max">ĐẶC SẮC</a></li>
 
-                            <li><a href="about.html">TÁC GIẢ</a></li>
+{{--                            <li><a href="about.html">TÁC GIẢ</a></li>--}}
                             <li><a href="#">CÁC TRANG</a>
                                 <ul class="sub-menu">
                                     <li><a href="{{asset('/home/about')}}">About Us</a></li>
                                     <li><a href="{{asset('/home/showCart')}}">Cart Page</a></li>
-                                    <li><a href="checkout.html">Check Out</a></li>
+{{--                                    <li><a href="checkout.html">Check Out</a></li>--}}
                                     <li><a href="{{asset('/home/contact')}}">Contact</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="shop.html">Shopping Page</a></li>
-                                    <li><a href="single-product.html">Single Shop Page</a></li>
-                                    <li><a href="wishlist.html">Wishlist Page</a></li>
-                                    <li><a href="404.html">404 Page</a></li>
+{{--                                    <li><a href="login.html">Login</a></li>--}}
+{{--                                    <li><a href="my-account.html">My Account</a></li>--}}
+{{--                                    <li><a href="shop.html">Shopping Page</a></li>--}}
+{{--                                    <li><a href="single-product.html">Single Shop Page</a></li>--}}
+{{--                                    <li><a href="wishlist.html">Wishlist Page</a></li>--}}
+{{--                                    <li><a href="404.html">404 Page</a></li>--}}
                                 </ul>
                             </li>
                             <li><a href="{{route('frontend.home.contact')}}">LIÊN HỆ</a></li>
@@ -149,7 +149,7 @@
                                                     @csrf
                                                 </form>
 
-
+                                                <a class="dropdown-item" href="{{route('backend.oder.showOders',Auth::user()->id)}}" style="font-size: 16px; padding: 10px">Giỏ hàng</a>
                                                 <a class="dropdown-item" href="{{route('frontend.home.showAccount',Auth::user()->id)}}" style="font-size: 16px; padding: 10px">My Account</a>
                                             </div>
                                             </div>

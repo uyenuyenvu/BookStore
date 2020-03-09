@@ -103,6 +103,7 @@ class BookController extends Controller
 //        ]);
 //
         $book = new Book();
+//        dd($request);
         $book->name = $request->get('name');
         $book->slug = \Illuminate\Support\Str::slug($request->get('name')).time();
         $book->category_id = $request->get('category_id');
@@ -216,6 +217,7 @@ class BookController extends Controller
         $categories = \DB::table('categories')->get();
 
 //        $book=Book::find($id);
+        $this->authorize('update',$book);
 
         $user=Auth::user();
 //    dd($book->id);
@@ -269,6 +271,7 @@ class BookController extends Controller
         ]);
 
         $book = Book::find($id);
+        $this->authorize('update',$book);
         $book->name = $request->get('name');
 //        $book->slug = \Illuminate\Support\Str::slug($request->get('name'));
         $book->category_id = $request->get('category_id');
@@ -305,6 +308,7 @@ class BookController extends Controller
     }
     public function cancelDelete($id){
         $book=Book::find($id);
+        $this->authorize('create',$book);
         $book->deleteds_at=null;
         $book->save();
         return redirect()->back();
@@ -330,6 +334,7 @@ class BookController extends Controller
     }
     public function approved($id){
         $book=Book::find($id);
+        $this->authorize('approve', $book);
         $book->status=1;
         $book->save();
         return $this->listApprove();

@@ -37,7 +37,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" method="post" action="{{route('backend.category.update',$category->id)}}">
+                                <form role="form" method="post" action="{{route('backend.category.update',$category->id)}}" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="card-body">

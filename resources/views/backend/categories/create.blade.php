@@ -80,7 +80,7 @@
                                             <label for="exampleInputFile">Hình ảnh mô tả</label>
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" name="thumbnail" class="custom-file-input" id="exampleInputFile" value="">
+                                                    <input type="file" name="image" class="custom-file-input" id="exampleInputFile" value="">
                                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                                 </div>
                                                 <div class="input-group-append">

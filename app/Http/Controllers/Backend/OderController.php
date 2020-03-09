@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Models\Detail_oder;
 use App\Models\DetailOder;
 use App\Models\Detal_oder;
 use App\Models\Oder;
 use App\Models\Order;
+use App\Models\Shop;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Table;
+use phpDocumentor\Reflection\Types\Object_;
 
 class OderController extends Controller
 {
@@ -43,9 +46,12 @@ class OderController extends Controller
     }
     public function approve($id){
         $oder=Oder::find($id);
+        $shop=Shop::where('user_id',Auth::user()->id)->first();
+//        dd($shop);
         return view('backend.oders.approve')->with([
             'oder'=>$oder,
-            'user'=>Auth::user()
+            'user'=>Auth::user(),
+            'shop'=>$shop
         ]);
     }
     public function approved(Request $request,$id){
@@ -55,9 +61,11 @@ class OderController extends Controller
         $oder->shop_address=$request->shop_address;
         $oder->status=1;
         $oder->save();
+
         return view('backend.oders.detail')->with([
             'oder'=>$oder,
-            'user'=>Auth::user()
+            'user'=>Auth::user(),
+
         ]);
     }
     public function ship($id){
@@ -75,6 +83,14 @@ class OderController extends Controller
         $oder->status=3;
         $oder->time_finish=now();
         $oder->save();
+        $list=Detail_oder::where('oder_id',$id)->get();
+
+        foreach ($list as $book){
+            $pr=Book::find($book->book_id);
+            $pr->number_import=$pr->number_import - $book->quantity;
+            $pr->number_sold=$book->quantity;
+            $pr->save();
+        }
         return view('backend.oders.detail')->with([
             'oder'=>$oder,
             'user'=>Auth::user()
@@ -133,7 +149,7 @@ class OderController extends Controller
         $detail=Detail_oder::where('oder_id',$oder->id);
         Cart::destroy();
 
-        return $this->show($oder->id);
+        return redirect()->route('backend.oder.show',$oder->id);
 
     }
 
@@ -151,7 +167,15 @@ class OderController extends Controller
 //        dd($detail);
         return view('frontend.page.detailOder')->with([
             'oder'=>$oder,
-            'detail'=>$detail
+            'detail'=>$detail,
+            'user'=>Auth::user()
+        ]);
+    }
+    public function showOders($customer_id){
+        $oder=Oder::where('customer_id',$customer_id)->get();
+        return view('frontend.page.myOder')->with([
+            'all_oder'=>$oder,
+            'user'=>Auth::user()
         ]);
     }
 
@@ -203,4 +227,17 @@ class OderController extends Controller
             'user'=>Auth::user()
         ]);
     }
+
+    public function chart($month, $year){
+       $orders = DB::table('oders')
+           ->select(DB::raw('DATE(created_at) as date'), DB::raw('sum(total) as cost'))
+//           ->whereRaw([['month', '=', '01'],
+//               ['year', '=', '2020']])
+               ->whereRaw('MONTH(created_at) = ? AND YEAR(created_at) = ?', [$month, $year])
+           ->groupBy('date')
+           ->get();
+
+       return $orders;
+    }
+
 }
